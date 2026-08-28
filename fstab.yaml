@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://<your-author-host>/bin/franklin.delivery/edodemurureply/eds-poc-soco/main"
+    url: "https://author-p42403-e1312991.adobeaemcloud.com/bin/franklin.delivery/edodemurureply/eds-poc-soco/main"
     type: "markup"
     suffix: ".html"
