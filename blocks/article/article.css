@@ -1,0 +1,532 @@
+/*
+ * Article block styles.
+ *
+ * Reuse R8. This file is COMPILED, not hand-written. It is the output of running lessc over the
+ * article LESS in the Southern Company global repository, scoped to the .article block:
+ *
+ *   ui.apps/.../clientlibs/clientlib-site/site/css/typography.less   (body type scale)
+ *   ui.apps/.../components/content/articleCategory/clientlib/less/articleCategory.less
+ *   ui.apps/.../components/content/articletitle/clientlib/less/title.less
+ *   ui.apps/.../components/content/articleAuthor/clientlib/less/articleAuthor.less
+ *   ui.apps/.../components/content/articlePublishDate/clientlib/less/articlePublishDate.less
+ *   ui.apps/.../components/content/articleimage/clientlib/less/image.less
+ *
+ * Compiling rather than transcribing is deliberate: the values below are the live site's values,
+ * not an approximation of them, which is what makes the A4 visual-parity check meaningful.
+ *
+ * Three adaptations, all selector-level - nothing is restyled:
+ *   1. Everything is scoped under .article.
+ *   2. title.less keyed its subtitle rule off the page-level wrappers .articlepage /
+ *      .articlelandingpage, which do not exist on Edge Delivery. Rewritten to the block root.
+ *   3. The :root custom-property palette from variables.less is omitted. The compiled rules
+ *      resolve to literal values and never reference it, so shipping a global palette from a
+ *      block file would leak scope for no benefit.
+ *
+ * The .breadcrumb rule is carried over verbatim though the POC renders no breadcrumb, so the
+ * spacing is already correct if one is added later.
+ *
+ * Block-specific additions (the block wrapper, the hero picture, the error state) are at the
+ * end, clearly separated from the ported rules.
+ */
+
+/*
+ * These rules are switched off for this file only, because satisfying them would mean changing
+ * ported output rather than improving it:
+ *
+ *   selector-class-pattern     the class names ARE the contract with the source markup
+ *                              (.cmp-title__text, .article--pubishedDate-date, and the rest).
+ *                              Renaming them to kebab-case would break DOM parity, which is
+ *                              the whole point of the block.
+ *   media-feature-range-notation   the compiled breakpoints are min-width/max-width. Rewriting
+ *                              them to range syntax changes ported output and drops Safari
+ *                              below 16.4 for no gain.
+ *   no-descending-specificity  the cascade order is the compiler's, and the live site depends
+ *                              on it.
+ *   declaration-block-no-duplicate-properties   .cmp-image sets max-width twice because the
+ *                              bootstrap-container mixin adds its own. The live site has the
+ *                              same duplicate and the same winner.
+ *   font-family-name-quotes    the source quotes 'jaf-bernina-sans'.
+ *   number-max-precision       the line heights are Bootstrap's (1.14285714 and friends).
+ *                              Rounding them to four places is a small but real change to a
+ *                              value this file exists to reproduce exactly.
+ *   selector-type-no-unknown   typography.less contains a bare `underline { }` rule - almost
+ *                              certainly a missing dot, and dead CSS on the live site too. It
+ *                              is carried over as-is rather than silently corrected here; the
+ *                              fix belongs in the source repository.
+ */
+/* stylelint-disable selector-class-pattern, media-feature-range-notation */
+/* stylelint-disable no-descending-specificity, declaration-block-no-duplicate-properties */
+/* stylelint-disable font-family-name-quotes, number-max-precision, selector-type-no-unknown */
+
+.article b,
+.article strong {
+  font-weight: 700;
+}
+
+.article i,
+.article em {
+  font-style: italic;
+}
+
+.article h1,
+.article .h1,
+.article h2,
+.article .h2,
+.article h3,
+.article .h3,
+.article h4,
+.article .h4,
+.article h5,
+.article .h5,
+.article h6,
+.article .h6 {
+  margin-bottom: 20px;
+  line-height: 1.33;
+}
+
+.article h1,
+.article .h1 {
+  font-family: 'jaf-bernina-sans', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 35px;
+  letter-spacing: -0.25px;
+  margin-bottom: 6px;
+}
+
+@media (min-width: 992px) {
+  .article h1,
+  .article .h1 {
+    font-size: 40px;
+    margin-bottom: initial;
+  }
+}
+
+.article h2,
+.article .h2 {
+  font-family: 'jaf-bernina-sans', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 28px;
+  letter-spacing: -0.25px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 992px) {
+  .article h2,
+  .article .h2 {
+    font-size: 30px;
+  }
+}
+
+.article h3,
+.article .h3 {
+  font-family: 'jaf-bernina-sans', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 24px;
+  letter-spacing: -0.25px;
+  margin-bottom: 16px;
+}
+
+.article h4,
+.article .h4 {
+  font-family: 'jaf-bernina-sans', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 21px;
+  letter-spacing: -0.25px;
+}
+
+.article h5,
+.article .h5 {
+  font-family: 'jaf-bernina-sans', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  letter-spacing: -0.25px;
+}
+
+.article h6,
+.article .h6 {
+  font-family: 'jaf-bernina-sans', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  letter-spacing: -0.25px;
+}
+
+.article p,
+.article .p {
+  font-family: 'jaf-bernina-sans', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 16px;
+  font-size: 1.14285714rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.article p:last-child,
+.article .p:last-child {
+  margin-bottom: 0;
+}
+
+.article .small {
+  font-size: 85%;
+}
+
+.article .lead {
+  font-size: 18px;
+  font-size: 1.28571429rem;
+  line-height: 1.44444444;
+}
+
+@media (min-width: 992px) {
+  .article .lead {
+    font-size: 21px;
+    font-size: 1.5rem;
+    line-height: 1.38095238;
+  }
+}
+
+.article .text-left {
+  text-align: left;
+}
+
+.article .text-right {
+  text-align: right;
+}
+
+.article .text-center {
+  text-align: center;
+}
+
+.article .text-justify {
+  text-align: justify;
+}
+
+.article .text-nowrap {
+  white-space: nowrap;
+}
+
+.article .text-lowercase {
+  text-transform: lowercase;
+}
+
+.article .text-uppercase {
+  text-transform: uppercase;
+}
+
+.article .text-capitalize {
+  text-transform: capitalize;
+}
+
+.article .bold {
+  font-weight: 700;
+}
+
+.article .italic {
+  font-style: italic;
+}
+
+.article .underline {
+  text-decoration: underline;
+}
+
+.article underline {
+  text-decoration: underline;
+}
+
+.article .teletype {
+  font-family: 'Lucida Console', monospace;
+}
+
+.article ul,
+.article ol {
+  margin-top: 0;
+  padding: 0 0 0 20px;
+  margin-bottom: 20px;
+}
+
+.article ul li,
+.article ol li {
+  font-size: 16px;
+  font-size: 1.14285714rem;
+  line-height: 1.5;
+  font-family: 'jaf-bernina-sans', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.article ul li:last-child,
+.article ol li:last-child {
+  margin-bottom: 0;
+}
+
+.article ul ul,
+.article ol ul,
+.article ul ol,
+.article ol ol {
+  margin-bottom: 0;
+}
+
+.article ul {
+  list-style: disc;
+}
+
+.article ol {
+  list-style: decimal;
+}
+
+.article sub,
+.article sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.article sup {
+  top: -0.5em;
+}
+
+.article sub {
+  bottom: -0.25em;
+}
+
+.article .article-category-container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 22px auto 20px;
+}
+
+@media (min-width: 768px) {
+  .article .article-category-container {
+    margin-top: 30px;
+  }
+}
+
+.article .article-category-container a {
+  font-family: 'jaf-bernina-sans', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #505050;
+}
+
+@media (min-width: 768px) {
+  .article .article-category-container a {
+    font-size: 12px;
+  }
+}
+
+.article .article-category-container a::after {
+  content: ',';
+  margin-right: 2px;
+}
+
+.article .article-category-container a:last-child::after {
+  content: '';
+}
+
+.article .cmp-title {
+  width: 100%;
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.article .cmp-title--underline .cmp-title .cmp-title__text::after {
+  content: '';
+  display: block;
+  width: 84px;
+  padding-top: 8px;
+}
+
+.article .breadcrumb + .title {
+  margin-top: 2em;
+}
+
+.article .cmp-title .cmp-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.article .article--author-section .article--author {
+  font-size: 16px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #000;
+}
+
+@media (max-width: 991px) {
+  .article .article--author-section .article--author {
+    font-size: 15px;
+  }
+}
+
+.article .article--publishedDate-section .article--pubishedDate-date {
+  font-size: 16px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #000;
+}
+
+@media (max-width: 991px) {
+  .article .article--publishedDate-section .article--pubishedDate-date {
+    font-size: 15px;
+  }
+}
+
+.article .articleimage {
+  padding-bottom: 15px;
+}
+
+.article .articleimage iframe {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: contain;
+}
+
+.article .articleimage .cmp-image {
+  max-width: 711px;
+  width: 100%;
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+
+.article .articleimage .cmp-image .fixedratio {
+  padding-top: 56.54%;
+  background-size: cover;
+}
+
+.article .articleimage .cmp-image .cmp-image__image {
+  max-width: 100%;
+  width: 335px;
+  height: 186px;
+  display: inline-block;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .article .articleimage .cmp-image .cmp-image__image {
+    width: 711px;
+    height: 402px;
+  }
+}
+
+.article .articleimage .cmp--image-margin-bottom {
+  margin-bottom: 11px;
+}
+
+.article .articleimage .cmp-image__title {
+  color: #000;
+  font-size: 12px;
+}
+
+.article .articlecontentfragment img {
+  max-width: 100%;
+}
+
+.article .articlecontentfragment .cq-dd-fragment p + div {
+  display: block !important;
+}
+
+.article .articlecontentfragment .cq-dd-fragment p + div > iframe {
+  position: absolute !important;
+}
+
+.article .articlecontentfragment .wp-caption.aligncenter > img,
+.article .articlecontentfragment .wp-caption.alignleft > img,
+.article .articlecontentfragment .wp-caption.alignright > img {
+  object-fit: contain;
+  height: fit-content;
+  max-height: fit-content;
+}
+
+/* ------------------------------------------------------------------------- */
+
+/* Block-specific. Not ported - these have no counterpart in the source,      */
+
+/* which server-renders into a page that already provides the wrapper.        */
+
+/* ------------------------------------------------------------------------- */
+
+.article {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* The hero image ships as an EDS optimised <picture>; the ported .cmp-image rules size the
+   <img> inside it, so the picture element only needs to not interfere. */
+.article .articleimage .cmp-image picture {
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* Body images arrive with AEM DAM URLs and are deliberately left alone for the POC (brief 6.2).
+   The ported .articlecontentfragment img rule above already constrains them to max-width: 100%,
+   which is what the live site does, so nothing is added here. */
+
+.article .articlecontentfragment table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+/* Earnings tables are the widest thing in the reference article. Let them scroll rather than
+   force the page to. */
+.article .articlecontentfragment {
+  overflow-x: auto;
+}
+
+.article[data-state='loading'] {
+  min-height: 40vh;
+}
+
+/*
+ * The visible error state required by brief 6.3 and acceptance criterion A3.
+ *
+ * Today a missing article either 302s to a 404 page or renders an English apology string with
+ * HTTP 200 (ContentFragmentUsePojo:160-172, catalogued as defect D13). This is deliberately not
+ * that: it is loud, and it does not pretend to be an article.
+ */
+.article-error {
+  max-width: 1140px;
+  margin: 40px auto;
+  padding: 24px;
+  border-left: 4px solid #ec1c24;
+  background: #f6f6f6;
+  font-family: 'jaf-bernina-sans', sans-serif;
+}
+
+.article-error h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: #b1181e;
+}
+
+.article-error p {
+  margin: 0 0 4px;
+  font-size: 15px;
+  color: #262626;
+}
+
+.article-error code {
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 13px;
+  word-break: break-all;
+}
