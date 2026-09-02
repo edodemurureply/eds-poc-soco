@@ -17,6 +17,9 @@ import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
  *   .article--publishedDate-section      articlePublishDate.html
  *   .articleimage .cmp-image             articleimage.html
  *   .articlecontentfragment              articlecontentfragment.html
+ *
+ * Structured data (R5) is out of scope for the POC: the block injects no JSON-LD, and the
+ * endpoint returns none.
  */
 
 /** Default endpoint. Overridable per page so the POC can be pointed at another environment. */
@@ -169,24 +172,6 @@ function renderBody(article) {
   return wrapper;
 }
 
-/**
- * Injects the structured data.
- *
- * R5: payload.schema is written out verbatim. It is the object the source's articleschema
- * component renders, so the structured data is provably identical rather than reimplemented.
- * This is the half of R6 that Option B moves out of the initial HTML - see brief 5.4.
- */
-function injectStructuredData(article) {
-  if (!article.schema) return;
-  if (document.querySelector('script[type="application/ld+json"][data-article-schema]')) return;
-
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-  script.dataset.articleSchema = '';
-  script.textContent = JSON.stringify(article.schema);
-  document.head.append(script);
-}
-
 function setMeta(selector, attribute, value, create) {
   if (!value) return;
   // Only fill gaps. A tag the generated page already shipped is the one crawlers actually saw,
@@ -243,7 +228,6 @@ function render(block, article) {
   block.replaceChildren(parts);
   block.dataset.state = 'loaded';
 
-  injectStructuredData(article);
   topUpHeadTags(article);
 }
 
