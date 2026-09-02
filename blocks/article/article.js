@@ -20,6 +20,11 @@ import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
  *
  * Structured data (R5) is out of scope for the POC: the block injects no JSON-LD, and the
  * endpoint returns none.
+ *
+ * The block serves both delivery options. If the shell page already contains the body - the page
+ * generator's includeBody flag, Option A - it leaves it alone and does nothing. Otherwise it
+ * fetches, which is Option B. data-source records which path ran, so the measurement work in
+ * brief 7 can tell the two apart without reading the code.
  */
 
 /** Default endpoint. Overridable per page so the POC can be pointed at another environment. */
@@ -231,8 +236,30 @@ function render(block, article) {
   topUpHeadTags(article);
 }
 
+/**
+ * True when the shell page already contains the article body.
+ *
+ * This is the read side of the generator's includeBody flag: under Option A the body HTML is
+ * written into the block at generation time and delivered in the initial HTML, so the block must
+ * not fetch and must not replace what the page shipped. Whitespace-only content still counts as
+ * empty, since an empty block renders as a div containing nothing but formatting.
+ */
+function hasServerRenderedBody(block) {
+  return block.textContent.trim().length > 0 || block.querySelector('img, picture, table') !== null;
+}
+
 export default async function decorate(block) {
   block.dataset.state = 'loading';
+  block.dataset.source = 'fetch';
+
+  // Option A: the generator wrote the body into the page, so the article is already in the
+  // initial HTML and there is nothing to fetch. The block only has to mark itself decorated.
+  // Option B (the default) ships an empty block and everything below runs.
+  if (hasServerRenderedBody(block)) {
+    block.dataset.state = 'loaded';
+    block.dataset.source = 'page';
+    return;
+  }
 
   const parsed = parseArticlePath(window.location.pathname);
   if (!parsed) {

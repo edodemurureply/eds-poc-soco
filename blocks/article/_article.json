@@ -21,6 +21,13 @@
       "id": "article",
       "fields": [
         {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "body",
+          "label": "Article body",
+          "description": "Written by the page generator when includeBody is on (Option A). Leave empty for Option B, where the browser fetches the body from the article endpoint."
+        },
+        {
           "component": "text",
           "valueType": "string",
           "name": "articleEndpoint",
