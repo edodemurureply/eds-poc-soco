@@ -1,0 +1,39 @@
+{
+  "definitions": [
+    {
+      "title": "section columns",
+      "id": "section-columns",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "model": "section-columns"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "section-columns",
+      "fields": [
+        {
+          "component": "text",
+          "name": "section-columns-name",
+          "label": "Section Name",
+          "description": "The label shown for this section in the Content Tree"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "section",
+      "components": [
+        "custom-columns"
+      ]
+    }
+  ]
+}

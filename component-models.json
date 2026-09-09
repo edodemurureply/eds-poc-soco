@@ -142,6 +142,17 @@
     ]
   },
   {
+    "id": "section-columns",
+    "fields": [
+      {
+        "component": "text",
+        "name": "section-columns-name",
+        "label": "Section Name",
+        "description": "The label shown for this section in the Content Tree"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -176,6 +187,28 @@
         "name": "rows",
         "value": "",
         "label": "Rows"
+      }
+    ]
+  },
+  {
+    "id": "custom-columns",
+    "fields": [
+      {
+        "component": "text",
+        "name": "custom-columns-size",
+        "label": "Add column size class (S, M, L, XL)",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "single-column",
+    "fields": [
+      {
+        "component": "text",
+        "name": "single-column-size",
+        "label": "Add column size class (S, M, L, XL)",
+        "required": true
       }
     ]
   },

@@ -17,6 +17,9 @@
   {
     "...": "./_section.json#/models"
   },
+    {
+    "...": "./_section-columns.json#/models"
+  },
   {
     "...": "../blocks/*/_*.json#/models"
   }
