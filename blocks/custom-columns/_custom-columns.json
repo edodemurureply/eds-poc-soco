@@ -17,14 +17,14 @@
       }
     },
     {
-      "title": "Single Column",
+      "title": "Single column",
       "id": "single-column",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "name": "Single Column",
+              "name": "Single column",
               "model": "single-column"
             }
           }

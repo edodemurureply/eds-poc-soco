@@ -1,13 +1,16 @@
 {
   "definitions": [
     {
-      "title": "section columns",
+      "title": "Section columns",
       "id": "section-columns",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/section/v1/section",
             "template": {
+              "filter": "section-columns",
+              "name": "Section columns",
+              "style": "section-columns",
               "model": "section-columns"
             }
           }
