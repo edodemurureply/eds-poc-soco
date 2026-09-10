@@ -170,7 +170,6 @@
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "Single column",
-                  "key-value": true,
                   "model": "single-column"
                 }
               }

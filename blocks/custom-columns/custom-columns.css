@@ -1,1 +1,48 @@
-/* css placeholder */
+.container-column {
+    border: 1px solid black;
+
+    &.container-column-xl {
+        width: 500px;
+        height: 500px;
+    }
+
+    &.container-column-l {
+        width: 400px;
+        height: 400px;
+    }
+
+    &.container-column-m {
+        width: 300px;
+        height: 300px;
+    }
+
+    &.container-column-s {
+        width: 250px;
+        height: 250px;
+    }
+
+    & .single-column {
+        border: 1px solid black;
+
+        &.single-column-xl {
+            width: 200px;
+            height: 200px;
+        }
+
+        &.single-column-l {
+            width: 150px;
+            height: 150px;
+        }
+
+        &.single-column-m {
+            width: 100px;
+            height: 100px;
+        }
+
+        
+        &.single-column-s {
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
