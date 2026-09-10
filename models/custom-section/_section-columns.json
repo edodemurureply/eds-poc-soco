@@ -30,7 +30,7 @@
   ],
   "filters": [
     {
-      "id": "section",
+      "id": "section-columns",
       "components": [
         "custom-columns"
       ]

@@ -26,7 +26,7 @@
           "...": "./_section.json#/definitions"
         },
         {
-          "...": "./_section-columns.json#/definitions"
+          "...": "./custom-section/_*.json#/definitions"
         }
       ]
     },
