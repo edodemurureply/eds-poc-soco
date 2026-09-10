@@ -11,5 +11,8 @@
   },
   {
     "...": "../blocks/*/_*.json#/filters"
+  },
+  {
+    "...": "./custom-section/_*.json#/filters"
   }
 ]
