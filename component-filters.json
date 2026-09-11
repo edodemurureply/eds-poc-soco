@@ -3,7 +3,8 @@
     "id": "main",
     "components": [
       "section",
-      "section-columns"
+      "section-columns",
+      "column-layout-section"
     ]
   },
   {
@@ -26,6 +27,12 @@
     ]
   },
   {
+    "id": "column-stack",
+    "components": [
+      "nested-column"
+    ]
+  },
+  {
     "id": "columns",
     "components": [
       "column"
@@ -44,6 +51,12 @@
     "id": "custom-columns",
     "components": [
       "single-column"
+    ]
+  },
+  {
+    "id": "column-layout-section",
+    "components": [
+      "column-stack"
     ]
   },
   {

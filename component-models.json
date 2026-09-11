@@ -142,6 +142,17 @@
     ]
   },
   {
+    "id": "column-layout-section",
+    "fields": [
+      {
+        "component": "text",
+        "name": "section-name",
+        "label": "Section name",
+        "description": "The label shown for this section in the Content Tree"
+      }
+    ]
+  },
+  {
     "id": "section-columns",
     "fields": [
       {
@@ -168,6 +179,80 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "column-stack",
+    "fields": [
+      {
+        "component": "text",
+        "name": "column-stack-title",
+        "label": "Title",
+        "required": true
+      },
+      {
+        "component": "select",
+        "name": "column-stack-size",
+        "label": "Column size",
+        "valueType": "string",
+        "value": "m",
+        "required": true,
+        "options": [
+          {
+            "name": "Small",
+            "value": "s"
+          },
+          {
+            "name": "Medium",
+            "value": "m"
+          },
+          {
+            "name": "Large",
+            "value": "l"
+          },
+          {
+            "name": "Extra Large",
+            "value": "xl"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nested-column",
+    "fields": [
+      {
+        "component": "text",
+        "name": "nested-column-title",
+        "label": "Title",
+        "required": true
+      },
+      {
+        "component": "select",
+        "name": "nested-column-size",
+        "label": "Column size",
+        "valueType": "string",
+        "value": "m",
+        "required": true,
+        "options": [
+          {
+            "name": "Small",
+            "value": "s"
+          },
+          {
+            "name": "Medium",
+            "value": "m"
+          },
+          {
+            "name": "Large",
+            "value": "l"
+          },
+          {
+            "name": "Extra Large",
+            "value": "xl"
+          }
+        ]
       }
     ]
   },

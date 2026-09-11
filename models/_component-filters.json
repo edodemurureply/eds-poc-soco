@@ -3,7 +3,8 @@
     "id": "main",
     "components": [
       "section",
-      "section-columns"
+      "section-columns",
+      "column-layout-section"
     ]
   },
   {

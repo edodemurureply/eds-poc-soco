@@ -77,6 +77,23 @@
           }
         },
         {
+          "title": "Column layout section",
+          "id": "column-layout-section",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/section/v1/section",
+                "template": {
+                  "filter": "column-layout-section",
+                  "name": "Column layout section",
+                  "style": "column-layout-section",
+                  "model": "column-layout-section"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Section columns",
           "id": "section-columns",
           "plugins": {
@@ -124,6 +141,38 @@
                 "template": {
                   "name": "Card",
                   "model": "card"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Column stack",
+          "id": "column-stack",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Column stack",
+                  "key-value": true,
+                  "filter": "column-stack",
+                  "model": "column-stack"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Nested column",
+          "id": "nested-column",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Nested column",
+                  "model": "nested-column"
                 }
               }
             }
