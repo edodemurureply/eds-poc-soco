@@ -2,7 +2,9 @@
   {
     "id": "main",
     "components": [
-      "section"
+      "section",
+      "section-columns",
+      "column-layout-section"
     ]
   },
   {
@@ -10,5 +12,8 @@
   },
   {
     "...": "../blocks/*/_*.json#/filters"
+  },
+  {
+    "...": "./custom-section/_*.json#/filters"
   }
 ]

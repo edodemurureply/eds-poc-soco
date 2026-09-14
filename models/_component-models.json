@@ -18,6 +18,9 @@
     "...": "./_section.json#/models"
   },
   {
+    "...": "./custom-section/_*.json#/models"
+  },
+  {
     "...": "../blocks/*/_*.json#/models"
   }
 ]

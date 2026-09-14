@@ -1,0 +1,42 @@
+{
+  "definitions": [
+    {
+      "title": "Column layout section",
+      "id": "column-layout-section",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "filter": "column-layout-section",
+              "name": "Column layout section",
+              "style": "column-layout-section",
+              "model": "column-layout-section"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "column-layout-section",
+      "fields": [
+        {
+          "component": "text",
+          "name": "section-name",
+          "label": "Section name",
+          "description": "The label shown for this section in the Content Tree"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "column-layout-section",
+      "components": [
+        "column-stack"
+      ]
+    }
+  ]
+}

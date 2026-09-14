@@ -1,0 +1,120 @@
+{
+  "definitions": [
+    {
+      "title": "Column stack",
+      "id": "column-stack",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Column stack",
+              "key-value": true,
+              "filter": "column-stack",
+              "model": "column-stack"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Nested column",
+      "id": "nested-column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Nested column",
+              "model": "nested-column"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "column-stack",
+      "fields": [
+        {
+          "component": "text",
+          "name": "column-stack-title",
+          "label": "Title",
+          "required": true
+        },
+        {
+          "component": "select",
+          "name": "column-stack-size",
+          "label": "Column size",
+          "valueType": "string",
+          "value": "m",
+          "required": true,
+          "options": [
+            {
+              "name": "Small",
+              "value": "s"
+            },
+            {
+              "name": "Medium",
+              "value": "m"
+            },
+            {
+              "name": "Large",
+              "value": "l"
+            },
+            {
+              "name": "Extra Large",
+              "value": "xl"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nested-column",
+      "fields": [
+        {
+          "component": "text",
+          "name": "nested-column-title",
+          "label": "Title",
+          "required": true
+        },
+        {
+          "component": "select",
+          "name": "nested-column-size",
+          "label": "Column size",
+          "valueType": "string",
+          "value": "m",
+          "required": true,
+          "options": [
+            {
+              "name": "Small",
+              "value": "s"
+            },
+            {
+              "name": "Medium",
+              "value": "m"
+            },
+            {
+              "name": "Large",
+              "value": "l"
+            },
+            {
+              "name": "Extra Large",
+              "value": "xl"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "column-stack",
+      "components": [
+        "nested-column"
+      ]
+    }
+  ]
+}
