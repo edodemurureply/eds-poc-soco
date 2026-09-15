@@ -26,7 +26,9 @@
   {
     "id": "callout-list",
     "components": [
-      "callout-item"
+      "callout-item-info",
+      "callout-item-success",
+      "callout-item-warning"
     ]
   },
   {

@@ -16,8 +16,8 @@
       }
     },
     {
-      "title": "Callout item",
-      "id": "callout-item",
+      "title": "Callout item · Informazione",
+      "id": "callout-item-info",
       "plugins": {
         "xwalk": {
           "page": {
@@ -27,6 +27,40 @@
               "model": "callout-item",
               "message": "<p>Questo è un messaggio informativo.</p>",
               "variant": "info"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Callout item · Successo",
+      "id": "callout-item-success",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Callout item",
+              "model": "callout-item",
+              "message": "<p>Operazione completata con successo.</p>",
+              "variant": "success"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Callout item · Attenzione",
+      "id": "callout-item-warning",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Callout item",
+              "model": "callout-item",
+              "message": "<p>Attenzione, controlla i dati inseriti.</p>",
+              "variant": "warning"
             }
           }
         }
@@ -64,7 +98,9 @@
     {
       "id": "callout-list",
       "components": [
-        "callout-item"
+        "callout-item-info",
+        "callout-item-success",
+        "callout-item-warning"
       ]
     }
   ]

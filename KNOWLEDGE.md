@@ -191,9 +191,9 @@ Primo componente "block dentro un block" scritto da zero (a differenza di `colum
 
 Struttura (`blocks/callout-list/_callout-list.json`):
 - Definition parent `callout-list`: `resourceType: .../block`, con `filter: "callout-list"` (nessun `model` proprio — il block non ha campi propri, solo item)
-- Definition item `callout-item`: `resourceType: .../block/item`, con `model: "callout-item"`
-- Model `callout-item`: stessi due campi di `callout` (`message` richtext + `variant` select info/success/warning) — riutilizza il pattern già validato invece di inventarne uno nuovo
-- Filter `callout-list` → `["callout-item"]` (in UE, dentro il block si può inserire solo questo tipo di item)
+- **Correzione dopo primo test in UE:** inizialmente un solo item definition `callout-item` nel filtro → UE non chiedeva nulla e inseriva sempre la variante di default (comportamento corretto ma inatteso: con un solo tipo nel filtro, UE non mostra il picker, lo mostra solo quando ci sono più opzioni tra cui scegliere — stesso motivo per cui dentro una section, con filtro `_section.json` che elenca tanti componenti, l'aggiunta apre un picker). Risolto creando **tre definition item distinte** che condividono lo stesso model `callout-item` ma preset diversi: `callout-item-info`, `callout-item-success`, `callout-item-warning` (titoli "Callout item · Informazione/Successo/Attenzione", ciascuna con `variant` e testo di default coerenti). Tutte e tre elencate nel filtro di `callout-list`, così l'aggiunta di un item ora apre un picker con le 3 varianti.
+- Model `callout-item`: stessi due campi di `callout` (`message` richtext + `variant` select info/success/warning, comunque modificabile dopo l'inserimento) — riutilizza il pattern già validato invece di inventarne uno nuovo
+- Filter `callout-list` → `["callout-item-info", "callout-item-success", "callout-item-warning"]`
 
 `callout-list.js`: itera `block.children` (ogni child è un item ripetuto), applica la stessa logica di `callout.js` per-item (classe `callout-list-item-{variant}` sul child, rimozione del div variante).
 
