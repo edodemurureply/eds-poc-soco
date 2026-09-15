@@ -118,9 +118,9 @@ Vedi file dedicato `UE_terminologia_component-definition.md` per il dettaglio di
 - [x] Repo clonato in locale (Windows, PowerShell)
 - [x] Accesso completo confermato (repo + Author Universal Editor)
 - [x] Esplorazione struttura repo (fatta — vedi §6)
-- [ ] Primo giro `aem up` locale
+- [x] Primo giro `aem up` locale
 - [ ] Analisi a fondo di `column-stack` vs `custom-columns` (capire pro/contro delle due iterazioni)
-- [ ] Primo componente semplice creato da zero (block + model piatto)
+- [x] Primo componente semplice creato da zero (block + model piatto) — block `quote` (richtext + text), vedi §10
 - [ ] Componente con varianti/select
 - [ ] Componente con contenuto ripetibile (`container`, `multi: true`)
 - [ ] Componente annidato/composto
@@ -135,7 +135,33 @@ Vedi file dedicato `UE_terminologia_component-definition.md` per il dettaglio di
 
 ---
 
-## 9. Come usare questo file nel workflow
+## 9. Primo componente pratico: block `quote`
+
+Seguito il tutorial ufficiale [Creating Blocks for Universal Editor](https://www.aem.live/developer/universal-editor-blocks), adattato al pattern a frammenti di questo repo (invece di editare a mano i file `component-*.json` aggregati in root):
+
+- `blocks/quote/_quote.json` — definition + model (campi `quote` richtext, `author` text) + filters vuoti
+- `blocks/quote/quote.js` — decorate: avvolge il testo in un `<blockquote>`
+- `blocks/quote/quote.css` — sfondo grigio, stile citazione con lineetta decorativa sotto l'autore
+- Aggiunto `"quote"` alla lista componenti permessi in `models/_section.json` (filtro della section standard)
+- Rigenerato con `npm run build:json`
+
+**Workflow di test stabilito (da ripetere per ogni nuovo blocco):**
+1. Sviluppare il block (json/js/css)
+2. Commit + push del branch di lavoro (mai in `main` — vedi nota sotto)
+3. Creare/usare una pagina dedicata in Sites Console + Universal Editor
+4. Aprire l'editor con `?ref=<branch>` in coda all'URL (altrimenti l'editor legge i componenti da `main` e il nuovo block non compare nella ricerca "+")
+5. Aggiungere il componente, personalizzare i campi, pubblicare in **Anteprima** (mai "Live")
+6. Verificare via `curl <preview-url>/index/<page-name>.md` e `.html`
+
+**Nota sul path delle pagine:** le pagine create in Sites Console sotto la root del sito risultano raggiungibili come `/index/<nome-pagina>` in preview/live (non `/<nome-pagina>` diretto) — es. pagina `test-quote` → `https://<branch>--eds-poc-soco--edodemurureply.aem.page/index/test-quote`.
+
+**Testato su:** branch `feature/ue-tutorial`, pagina `test-quote`, pubblicato in anteprima. ✅ Funzionante end-to-end.
+
+**Regola importante:** `CLAUDE.md`, `KNOWLEDGE.md` e `AGENTS.md` non vanno **mai** pushati/mergiati in `main` — restano solo sui branch di lavoro/pratica.
+
+---
+
+## 10. Come usare questo file nel workflow
 
 - **Claude.ai (questo progetto):** teoria, roadmap, decisioni — aggiorna le sezioni 4, 5, 8
 - **Claude Code (repo locale):** esplorazione pratica, codice — aggiorna le sezioni 6, 7
