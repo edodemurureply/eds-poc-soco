@@ -121,7 +121,7 @@ Vedi file dedicato `UE_terminologia_component-definition.md` per il dettaglio di
 - [x] Accesso completo confermato (repo + Author Universal Editor)
 - [x] Esplorazione struttura repo (fatta — vedi §6)
 - [x] Primo giro `aem up` locale
-- [ ] Analisi a fondo di `column-stack` vs `custom-columns` (capire pro/contro delle due iterazioni)
+- [x] Analisi a fondo di `column-stack` vs `custom-columns` (vedi §8 per la conclusione)
 - [x] Primo componente semplice creato da zero (block + model piatto) — block `quote` (richtext + text), vedi §9
 - [~] Componente con varianti/select — in corso
 - [ ] Componente con contenuto ripetibile (`container`, `multi: true`)
@@ -131,7 +131,10 @@ Vedi file dedicato `UE_terminologia_component-definition.md` per il dettaglio di
 
 ## 8. Domande aperte / decisioni da prendere
 
-- [ ] `column-stack` e `custom-columns` sono due esperimenti da confrontare/consolidare, o vanno tenuti entrambi come pattern diversi?
+- [x] `column-stack` vs `custom-columns` — **analizzati entrambi, risposta trovata.** Sono due iterazioni dello stesso obiettivo visivo (scatole annidate di dimensione decrescente), con strategie tecniche opposte:
+  - **Nesting nel DOM:** `column-stack` è "finto" (gli item restano fratelli nel DOM, l'effetto scatole-dentro-scatole è ottenuto solo via CSS con `position: absolute` + custom property `--column-depth`); `custom-columns` è "vero" (ogni `single-column` viene annidato realmente dentro il precedente durante la decorazione, con un ciclo che sposta il "parent corrente" a ogni iterazione).
+  - **Campo dimensione:** `column-stack` usa un `select` con opzioni fisse (s/m/l/xl); `custom-columns` usa un campo di testo libero, gestito solo con un `.toLowerCase()` — nessuna validazione su refusi, spazi, o valori non previsti (se l'autore sbaglia, semplicemente non viene applicato nessuno stile, senza errore visibile).
+  - **Conclusione:** `column-stack` è la versione più matura/robusta (probabilmente la seconda iterazione, con la lezione imparata su cosa non fare); `custom-columns` è il prototipo più fragile. Da preferire `column-stack` come riferimento per pattern futuri di nesting in questo repo; `custom-columns` resta comunque utile come esempio didattico di "nesting reale nel DOM" contro "nesting simulato via CSS".
 - [ ] Perché `dompurify.min.js` nel block `article` — che tipo di contenuto HTML "libero" gestisce?
 - [ ] Verificare se `npm run build:json` è configurato/funzionante nel repo di test
 
