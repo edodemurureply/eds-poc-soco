@@ -12,7 +12,7 @@
 
 .quote blockquote .quote-quotation {
   font-size: 120%;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 .quote blockquote .quote-quotation > :first-child {

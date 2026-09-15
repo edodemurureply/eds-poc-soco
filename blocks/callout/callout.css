@@ -1,0 +1,24 @@
+.callout {
+  padding: 16px 24px;
+  border-left: 4px solid;
+  border-radius: 4px;
+}
+
+.callout .callout-message {
+  margin: 0;
+}
+
+.callout.callout-info {
+  background-color: #e7f1ff;
+  border-color: #2563eb;
+}
+
+.callout.callout-success {
+  background-color: #e7f9ee;
+  border-color: #16a34a;
+}
+
+.callout.callout-warning {
+  background-color: #fff7e6;
+  border-color: #d97706;
+}

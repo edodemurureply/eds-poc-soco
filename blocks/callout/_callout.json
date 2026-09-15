@@ -1,0 +1,49 @@
+{
+  "definitions": [
+    {
+      "title": "Callout",
+      "id": "callout",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Callout",
+              "model": "callout",
+              "message": "<p>Questo è un messaggio informativo.</p>",
+              "variant": "info"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "callout",
+      "fields": [
+        {
+          "component": "richtext",
+          "name": "message",
+          "value": "",
+          "label": "Messaggio",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "variant",
+          "label": "Variante",
+          "valueType": "string",
+          "value": "info",
+          "required": true,
+          "options": [
+            { "name": "Informazione", "value": "info" },
+            { "name": "Successo", "value": "success" },
+            { "name": "Attenzione", "value": "warning" }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": []
+}
