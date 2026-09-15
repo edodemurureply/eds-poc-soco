@@ -12,6 +12,7 @@
 
 .quote blockquote .quote-quotation {
   font-size: 120%;
+  font-family: "Georgia", "Times New Roman", serif;
 }
 
 .quote blockquote .quote-quotation > :first-child {
@@ -33,6 +34,9 @@
 
 .quote blockquote .quote-attribution {
   text-align: right;
+  font-weight: 400;
+  font-style: italic;
+  color: #7a7a7a;
 }
 
 .quote blockquote .quote-attribution > :first-child::before {
