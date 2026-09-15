@@ -160,7 +160,7 @@ With this information, you can construct URLs for the preview environment (same 
 - **Feature Preview**: `https://{branch}--{repo}--{owner}.aem.page/`
 
 ### Publishing Process
-1. Push changes to a feature branch
+1. Push changes to a feature branch, named `feature/{feature-name}`
 2. AEM Code Sync automatically processes changes making them available on feature preview environment for that branch
 3. Run a PageSpeed Insights check at https://developers.google.com/speed/pagespeed/insights/?url=YOUR_URL against the feature preview URL and fix any issues. Target a score of 100
 4. Open a pull request to merge changes to `main`
