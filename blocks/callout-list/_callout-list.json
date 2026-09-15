@@ -24,7 +24,7 @@
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
               "name": "Callout item",
-              "model": "callout-item",
+              "model": "callout",
               "message": "<p>Questo è un messaggio informativo.</p>",
               "variant": "info"
             }
@@ -41,7 +41,7 @@
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
               "name": "Callout item",
-              "model": "callout-item",
+              "model": "callout",
               "message": "<p>Operazione completata con successo.</p>",
               "variant": "success"
             }
@@ -58,7 +58,7 @@
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
               "name": "Callout item",
-              "model": "callout-item",
+              "model": "callout",
               "message": "<p>Attenzione, controlla i dati inseriti.</p>",
               "variant": "warning"
             }
@@ -67,33 +67,7 @@
       }
     }
   ],
-  "models": [
-    {
-      "id": "callout-item",
-      "fields": [
-        {
-          "component": "richtext",
-          "name": "message",
-          "value": "",
-          "label": "Messaggio",
-          "valueType": "string"
-        },
-        {
-          "component": "select",
-          "name": "variant",
-          "label": "Variante",
-          "valueType": "string",
-          "value": "info",
-          "required": true,
-          "options": [
-            { "name": "Informazione", "value": "info" },
-            { "name": "Successo", "value": "success" },
-            { "name": "Attenzione", "value": "warning" }
-          ]
-        }
-      ]
-    }
-  ],
+  "models": [],
   "filters": [
     {
       "id": "callout-list",

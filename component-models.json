@@ -190,40 +190,6 @@
     ]
   },
   {
-    "id": "callout-item",
-    "fields": [
-      {
-        "component": "richtext",
-        "name": "message",
-        "value": "",
-        "label": "Messaggio",
-        "valueType": "string"
-      },
-      {
-        "component": "select",
-        "name": "variant",
-        "label": "Variante",
-        "valueType": "string",
-        "value": "info",
-        "required": true,
-        "options": [
-          {
-            "name": "Informazione",
-            "value": "info"
-          },
-          {
-            "name": "Successo",
-            "value": "success"
-          },
-          {
-            "name": "Attenzione",
-            "value": "warning"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "callout",
     "fields": [
       {

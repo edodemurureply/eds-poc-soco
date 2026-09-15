@@ -155,7 +155,7 @@
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "Callout item",
-                  "model": "callout-item",
+                  "model": "callout",
                   "message": "<p>Questo è un messaggio informativo.</p>",
                   "variant": "info"
                 }
@@ -172,7 +172,7 @@
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "Callout item",
-                  "model": "callout-item",
+                  "model": "callout",
                   "message": "<p>Operazione completata con successo.</p>",
                   "variant": "success"
                 }
@@ -189,7 +189,7 @@
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "Callout item",
-                  "model": "callout-item",
+                  "model": "callout",
                   "message": "<p>Attenzione, controlla i dati inseriti.</p>",
                   "variant": "warning"
                 }
