@@ -52,7 +52,8 @@
         "columns",
         "fragment",
         "quote",
-        "callout"
+        "callout",
+        "callout-list"
       ]
     }
   ]

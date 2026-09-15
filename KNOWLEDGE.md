@@ -123,9 +123,9 @@ Vedi file dedicato `UE_terminologia_component-definition.md` per il dettaglio di
 - [x] Primo giro `aem up` locale
 - [x] Analisi a fondo di `column-stack` vs `custom-columns` (vedi §8 per la conclusione)
 - [x] Primo componente semplice creato da zero (block + model piatto) — block `quote` (richtext + text), vedi §9
-- [~] Componente con varianti/select — in corso
-- [ ] Componente con contenuto ripetibile (`container`, `multi: true`)
-- [ ] Componente annidato/composto
+- [x] Componente con varianti/select — block `callout` (richtext + select variant: info/success/warning)
+- [x] Componente con contenuto ripetibile (`container`/block-item) — block `callout-list`, vedi §9-bis
+- [ ] Componente annidato/composto (studio già fatto su `column-stack`/`custom-columns` esistenti, vedi §8; manca un componente scritto da zero con questo pattern)
 
 ---
 
@@ -177,6 +177,34 @@ Seguito il tutorial ufficiale [Creating Blocks for Universal Editor](https://www
 
 ---
 
+## 9-bis. Componente con varianti: block `callout`
+
+Block piatto (non ripetibile) con due campi: `message` (richtext) e `variant` (select: info/success/warning).
+`decorate()` legge il testo del secondo child, lo usa per aggiungere una classe `callout-{variant}` al block, poi rimuove il div della variante dal DOM.
+Il CSS applica colori diversi per variante tramite selettori `.callout.callout-{variant}`.
+
+Testato su branch `feature/ue-tutorial`, aggiunto ai filtri di `_section.json`.
+
+## 9-ter. Componente ripetibile con item annidati e varianti: block `callout-list`
+
+Primo componente "block dentro un block" scritto da zero (a differenza di `column-stack`/`custom-columns`, che erano già presenti nel repo). Pattern scelto: **container con item ripetibili** (block/item UE standard), stesso approccio usato da `cards`/`card` nel boilerplate — non il nesting reale nel DOM (`custom-columns`) né il nesting via CSS (`column-stack`), giudicati meno adatti per una lista di elementi indipendenti.
+
+Struttura (`blocks/callout-list/_callout-list.json`):
+- Definition parent `callout-list`: `resourceType: .../block`, con `filter: "callout-list"` (nessun `model` proprio — il block non ha campi propri, solo item)
+- Definition item `callout-item`: `resourceType: .../block/item`, con `model: "callout-item"`
+- Model `callout-item`: stessi due campi di `callout` (`message` richtext + `variant` select info/success/warning) — riutilizza il pattern già validato invece di inventarne uno nuovo
+- Filter `callout-list` → `["callout-item"]` (in UE, dentro il block si può inserire solo questo tipo di item)
+
+`callout-list.js`: itera `block.children` (ogni child è un item ripetuto), applica la stessa logica di `callout.js` per-item (classe `callout-list-item-{variant}` sul child, rimozione del div variante).
+
+`callout-list.css`: container in `display: flex; flex-direction: column; gap` + stessi colori per variante di `callout.css`, con selettori scoped su `.callout-list-item-*` invece di `.callout-*` (nomi diversi per evitare collisioni con le classi del block `callout`).
+
+**Verifica fatta:** pipeline locale (`aem up --html-folder`) conferma che il markup block/item viene riconosciuto e processato correttamente dal motore Franklin/EDS (struttura a righe → item ripetuti). Verifica visiva/end-to-end in Universal Editor **ancora da fare** — prossimo passo.
+
+Aggiunto `"callout-list"` ai filtri di `_section.json`, rigenerato con `npm run build:json`.
+
+---
+
 ## 10. Come usare questo file nel workflow
 
 - **Claude.ai (questo progetto):** teoria, roadmap, decisioni — aggiorna le sezioni 4, 5, 8
@@ -185,4 +213,4 @@ Seguito il tutorial ufficiale [Creating Blocks for Universal Editor](https://www
 - Dopo ogni sessione, riporta qui (anche solo a voce, in chat) cosa è stato scoperto/fatto, così l'aggiorniamo insieme
 
 ---
-*Ultimo aggiornamento: 15 settembre 2026*
+*Ultimo aggiornamento: 15 settembre 2026 (aggiunta §9-bis `callout`, §9-ter `callout-list`)*

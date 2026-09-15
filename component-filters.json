@@ -19,7 +19,14 @@
       "columns",
       "fragment",
       "quote",
-      "callout"
+      "callout",
+      "callout-list"
+    ]
+  },
+  {
+    "id": "callout-list",
+    "components": [
+      "callout-item"
     ]
   },
   {
