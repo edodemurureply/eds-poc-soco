@@ -199,7 +199,13 @@ Struttura (`blocks/callout-list/_callout-list.json`):
 
 `callout-list.css`: container in `display: flex; flex-direction: column; gap` + stessi colori per variante di `callout.css`, con selettori scoped su `.callout-list-item-*` invece di `.callout-*` (nomi diversi per evitare collisioni con le classi del block `callout`).
 
-**Verifica fatta:** pipeline locale (`aem up --html-folder`) conferma che il markup block/item viene riconosciuto e processato correttamente dal motore Franklin/EDS (struttura a righe → item ripetuti). Verifica visiva/end-to-end in Universal Editor **ancora da fare** — prossimo passo.
+**Verifica fatta:** pipeline locale (`aem up --html-folder`) conferma che il markup block/item viene riconosciuto e processato correttamente dal motore Franklin/EDS (struttura a righe → item ripetuti).
+
+**Bug trovato nel primo test end-to-end in UE:** un `callout-list` senza item (probabilmente un placeholder generato automaticamente da UE per i container vuoti, usando la prima opzione del filtro `callout-item-info`) veniva comunque renderizzato colorato "info" nel canvas — perché `decorate()` applicava un fallback `variant || 'info'` a *qualunque* riga, anche senza testo nel messaggio. Fix in `callout-list.js`: se `messageWrapper` non ha testo, la riga viene ignorata (nessuna classe di variante applicata, `return` anticipato) invece di ricevere uno stile colorato di default. Non ancora ri-testato in UE dopo la fix (serve un nuovo push).
+
+**Domanda aperta: si può impedire la pubblicazione di un `callout-list` vuoto (tipo un `minSize`)?** Verificato sulla doc ufficiale (`/docs/publishing-from-authoring`, sezione "Pre-publish validations"): EDS esegue solo un set **fisso e chiuso** di controlli prima di pubblicare/anteprima (permessi account tecnico, path riservati, validità immagini, validità JSON-LD) — nessun hook per regole di business custom tipo "minimo N figli in un container". **Non esiste un `minSize` nel modello xwalk**, né un modo per bloccare tecnicamente la pubblicazione di un blocco "troppo vuoto". L'unica leva realistica è editoriale (QA umana pre-lancio, vedi Go-Live Checklist ufficiale), non tecnica.
+
+Era stato proposto e implementato un placeholder CSS solo-authoring (`data-aue-resource` + `:has()`) per rendere visibile nel canvas UE un `callout-list` senza item — **rimosso su richiesta, non piaceva la soluzione**. Da ridiscutere.
 
 Aggiunto `"callout-list"` ai filtri di `_section.json`, rigenerato con `npm run build:json`.
 

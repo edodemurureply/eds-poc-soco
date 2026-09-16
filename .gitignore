@@ -11,3 +11,6 @@ helix-importer-ui
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md
+
+# Contesto locale, mai da pushare
+EDS_GUIDA_PRATICA_UFFICIALE.md
