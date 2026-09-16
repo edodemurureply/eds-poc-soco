@@ -48,7 +48,10 @@
         {
           "component": "aem-content",
           "name": "cta",
-          "label": "Link in evidenza — destinazione"
+          "label": "Link in evidenza — destinazione",
+          "validation": {
+            "rootPath": "/content/eds-poc-soco-2"
+          }
         },
         {
           "component": "text",
@@ -63,7 +66,10 @@
         {
           "component": "aem-content",
           "name": "link",
-          "label": "Destinazione"
+          "label": "Destinazione",
+          "validation": {
+            "rootPath": "/content/eds-poc-soco-2"
+          }
         },
         {
           "component": "text",
