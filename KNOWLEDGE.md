@@ -125,6 +125,7 @@ Vedi file dedicato `UE_terminologia_component-definition.md` per il dettaglio di
 - [x] Primo componente semplice creato da zero (block + model piatto) — block `quote` (richtext + text), vedi §9
 - [x] Componente con varianti/select — block `callout` (richtext + select variant: info/success/warning)
 - [x] Componente con contenuto ripetibile (`container`/block-item) — block `callout-list`, vedi §9-bis
+- [x] **Primo componente "di sistema": la navbar** — block `navigation`, vedi §9-quater. Primo caso in cui abbiamo sostituito un meccanismo del boilerplate invece di aggiungerne uno nuovo
 - [ ] Componente annidato/composto (studio già fatto su `column-stack`/`custom-columns` esistenti, vedi §8; manca un componente scritto da zero con questo pattern)
 
 ---
@@ -215,6 +216,28 @@ Struttura (`blocks/callout-list/_callout-list.json`):
 Era stato proposto e implementato un placeholder CSS solo-authoring (`data-aue-resource` + `:has()`) per rendere visibile nel canvas UE un `callout-list` senza item — **rimosso su richiesta, non piaceva la soluzione**. Da ridiscutere.
 
 Aggiunto `"callout-list"` ai filtri di `_section.json`, rigenerato con `npm run build:json`.
+
+---
+
+## 9-quater. La navbar: block `navigation` (16 settembre 2026)
+
+**Il punto di partenza — come funziona l'header nel boilerplate:**
+- L'header è su ogni pagina perché `scripts/scripts.js` lo carica in `loadLazy()` (`loadHeader(doc.querySelector('header'))`), non perché un autore lo aggiunga. Non è contenuto autorato per pagina, è struttura fissa
+- Il *contenuto* della navbar sta in una **pagina separata**, di default `/nav` (sovrascrivibile con la metadata `nav` nelle Page Properties), caricata da `header.js` con `loadFragment()`
+- **`/nav` non era un blocco**: era contenuto di default libero, e `header.js` mappava le prime **tre sezioni** posizionalmente su brand / sections / tools. Convenzione implicita, scoperta solo leggendo il JS, non dichiarata da nessuna parte all'autore
+
+**Cosa abbiamo fatto:** sostituito quel contenuto libero con un blocco vero, `navigation`, così il contratto è dichiarato nel modello e UE lo mostra come campi da compilare:
+- Proprietà del blocco: `brand` (solo testo — l'href è imposto dal codice a `/`), `cta` + `ctaText`
+- Item ripetibili `nav-link`: `link` + `linkText`
+- `header.js` riscritto: legge le righe del blocco (`[brandRow, ctaRow, ...linkRows]`) e costruisce brand/sections/tools
+
+**Cose imparate, non ovvie:**
+- **Field collapse in pratica** — `link` + `linkText` sono due campi per l'autore ma **un solo `<a>`** nell'HTML, generato dal renderer. Conseguenza inattesa: una voce con `linkText` ma senza `link` non produce **nulla** (il testo è un attributo dell'anchor, senza anchor non esiste elemento). Per questo le voci appena create sembravano non comparire: il "+" funzionava, ma l'elemento vuoto è invisibile nel canvas e si vede solo nella **Struttura contenuto**. È comportamento generale di UE (vale anche per una section vuota), non un difetto del nostro blocco — motivo per cui abbiamo scelto di non aggiungere valori di default finti per aggirarlo
+- **`validation.rootPath`** — senza, il selettore di `aem-content` si apre su `/content` e mostra **tutti i progetti dell'istanza**. Con `"validation": { "rootPath": "/content/eds-poc-soco-2" }` si limita al sito. Fonte: Field Types su Experience League. Attenzione: il path è scritto a mano, se il sito viene rinominato va aggiornato
+- **`moveInstrumentation()` usato davvero** — qui ricorre il caso che lo richiede (creiamo `<li>` e `<a>` nuovi che sostituiscono righe autorate). Diverso da `quote.js`/`callout.js`, dove spostiamo nodi esistenti e gli attributi viaggiano da soli
+- **La convenzione bottoni non funziona nelle celle dei blocchi** — `decorateButtons` cerca `p a[href]` e richiede grassetto/corsivo autorato; nelle celle di un blocco il link non è dentro un `<p>` e non c'è formattazione. Per questo il CTA è stilizzato a mano in `header.css` invece di appoggiarsi a `.button.primary`
+- **`display: contents`** — avvolgendo `.nav-sections` + `.nav-tools` in un `.nav-group` per la pillola desktop, su mobile i due figli avrebbero perso le loro `grid-area` (funzionano solo per figli diretti del grid). `display: contents` fa sparire il wrapper dal layout mantenendolo nel DOM
+- **`aria-expanded="true"` sulla nav non significa "menu aperto"** — su desktop `toggleMenu(nav, navSections, isDesktop.matches)` lo imposta sempre a `true`. Significa "le voci sono visibili". Chi stila basandosi su quell'attributo deve ricordarsi di neutralizzare la regola nel media query desktop
 
 ---
 

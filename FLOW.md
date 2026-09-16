@@ -6,6 +6,36 @@
 
 ---
 
+## URL pronti all'uso (questo progetto, branch `feature/ue-tutorial`)
+
+Sostituisci solo `<pagina>` (es. `test-quote`, `test-callout-list`).
+Le pagine sotto la radice del sito stanno in `index/`; `nav` invece sta alla radice.
+
+| Dove | URL |
+|---|---|
+| **Sviluppo locale** (`aem up` attivo) | `http://localhost:3000/index/<pagina>` |
+| **Sites Console** — trovare/creare pagine | `https://author-p42403-e1312991.adobeaemcloud.com/ui#/aem/sites.html/content/eds-poc-soco-2` |
+| **Editing in UE** — una pagina normale | `https://author-p42403-e1312991.adobeaemcloud.com/ui#/@aktivereplyemeaptrsd/aem/universal-editor/canvas/author-p42403-e1312991.adobeaemcloud.com/content/eds-poc-soco-2/index/<pagina>.html?ref=feature/ue-tutorial` |
+| **Editing in UE** — la navbar | `https://author-p42403-e1312991.adobeaemcloud.com/ui#/@aktivereplyemeaptrsd/aem/universal-editor/canvas/author-p42403-e1312991.adobeaemcloud.com/content/eds-poc-soco-2/nav.html?ref=feature/ue-tutorial` |
+| **Preview del branch** (dopo "Pubblica → Anteprima") | `https://feature-ue-tutorial--eds-poc-soco--edodemurureply.aem.page/index/<pagina>` |
+| **Live / produzione** (solo dopo merge in `main`) | `https://main--eds-poc-soco--edodemurureply.aem.live/index/<pagina>` |
+
+**Spostarsi tra pagine restando nell'editor:** il canvas di UE è legato a una singola pagina e non ha un navigatore interno. Invece di tornare alla Sites Console, modifica direttamente il percorso dentro l'URL del canvas — la parte `/content/eds-poc-soco-2/<percorso-pagina>.html` — e ricarica.
+
+**Contenuto di test in locale senza toccare AEM:** metti un file in `drafts/` (cartella ignorata da git) e avvia il server con `--html-folder drafts`. Per sovrascrivere una pagina alla radice del sito, come `/nav`, serve anche `--html-mount /`, e il file va chiamato `nav.plain.html`:
+```
+npx @adobe/aem-cli up --no-open --html-folder drafts --html-mount / --prefer-plain-html
+```
+⚠️ Da PowerShell, non da Git Bash: quest'ultimo converte lo `/` di `--html-mount` in un percorso Windows e il mount finisce nel posto sbagliato.
+
+**Contenuto del tuo branch invece che di `main` in locale:** di default `aem up` prende i contenuti dal preview di `main`, quindi le pagine pubblicate solo sul tuo branch non si vedono (o si vedono nella versione vecchia). Per puntarlo al tuo branch:
+```
+npx @adobe/aem-cli up --no-open --url https://feature-ue-tutorial--eds-poc-soco--edodemurureply.aem.page
+```
+Così hai **codice locale + contenuto del branch**, che è la combinazione giusta per sviluppare dopo aver pubblicato in Anteprima.
+
+---
+
 ## 0. Concetti chiave: i 3 "ambienti" diversi
 
 Ci sono **tre posti diversi** dove puoi vedere/testare il sito, e si confondono facilmente
