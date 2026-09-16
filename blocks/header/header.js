@@ -169,10 +169,12 @@ export default async function decorate(block) {
     navTools.append(cta);
   }
 
-  // sections and tools share one pill container on desktop
+  // sections and tools share one pill container on desktop; empty parts stay out of the
+  // DOM so the pill never gets painted around nothing
   const navGroup = document.createElement('div');
   navGroup.className = 'nav-group';
-  navGroup.append(navSections, navTools);
+  if (linkList.children.length) navGroup.append(navSections);
+  if (cta) navGroup.append(navTools);
   nav.append(navBrand, navGroup);
 
   // hamburger for mobile
