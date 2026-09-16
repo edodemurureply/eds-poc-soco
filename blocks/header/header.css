@@ -1,6 +1,5 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: var(--background-color);
   width: 100%;
   z-index: 2;
   position: fixed;
@@ -28,17 +27,15 @@ header nav[aria-expanded='true'] {
     'tools tools' var(--nav-height) / auto 1fr;
   overflow-y: auto;
   min-height: 100dvh;
+
+  /* the open mobile menu covers the page, so it needs to be opaque */
+  background-color: var(--background-color);
 }
 
 @media (width >= 900px) {
-  header .nav-wrapper {
-    position: relative;
-  }
-
   header nav {
     display: flex;
-    justify-content: space-between;
-    gap: 0 32px;
+    gap: 0 12px;
     max-width: 1264px;
     padding: 0 32px;
   }
@@ -46,6 +43,9 @@ header nav[aria-expanded='true'] {
   header nav[aria-expanded='true'] {
     min-height: 0;
     overflow: visible;
+
+    /* on desktop the nav is always "expanded", but must stay see-through */
+    background-color: transparent;
   }
 }
 
@@ -54,8 +54,17 @@ header nav p {
   line-height: 1;
 }
 
+header nav p.button-wrapper {
+  margin: 0;
+}
+
 header nav a:any-link {
   color: currentcolor;
+}
+
+/* on mobile the group must not exist as a box, or its children lose their grid areas */
+header nav .nav-group {
+  display: contents;
 }
 
 /* hamburger */
@@ -86,50 +95,49 @@ header nav .nav-hamburger-icon::after {
   display: block;
   position: relative;
   width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentcolor;
+
+  /* the three bars keep the same size in both states: only transform/background change,
+     so the browser can animate without recalculating any layout */
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 header nav .nav-hamburger-icon::before,
 header nav .nav-hamburger-icon::after {
   content: '';
   position: absolute;
-  background: currentcolor;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon,
-header nav[aria-expanded='false'] .nav-hamburger-icon::before,
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  height: 2px;
-  border-radius: 2px;
-  background: currentcolor;
+  inset: 0;
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
+  transform: translateY(-6px);
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
+  transform: translateY(6px);
 }
 
+/* the middle bar fades out; the outer two slide to the centre and cross */
 header nav[aria-expanded='true'] .nav-hamburger-icon {
-  height: 22px;
+  background: transparent;
 }
 
-header nav[aria-expanded='true'] .nav-hamburger-icon::before,
-header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: 3px;
-  left: 1px;
+header nav[aria-expanded='true'] .nav-hamburger-icon::before {
   transform: rotate(45deg);
-  transform-origin: 2px 1px;
-  width: 24px;
-  height: 2px;
-  border-radius: 2px;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: unset;
-  bottom: 3px;
   transform: rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header nav .nav-hamburger-icon,
+  header nav .nav-hamburger-icon::before,
+  header nav .nav-hamburger-icon::after {
+    transition: none;
+  }
 }
 
 @media (width >= 900px) {
@@ -174,7 +182,13 @@ header nav .nav-sections ul {
 }
 
 header nav .nav-sections ul > li {
-  font-weight: 500;
+  font-weight: 400;
+}
+
+header nav .nav-sections a[aria-current='page'] {
+  text-decoration: underline;
+  color: var(--text-color);
+  cursor: default;
 }
 
 header nav .nav-sections ul > li > ul {
@@ -186,10 +200,23 @@ header nav .nav-sections ul > li > ul > li {
 }
 
 @media (width >= 900px) {
+  header nav .nav-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+    margin-left: auto;
+    background-color: var(--light-color);
+    border-radius: 999px;
+    padding: 4px;
+  }
+
   header nav .nav-sections {
     display: block;
     visibility: visible;
     white-space: nowrap;
+    flex: 0 0 auto;
+    padding: 0 16px;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
@@ -269,4 +296,25 @@ header nav .nav-sections ul > li > ul > li {
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+}
+
+/* the call to action is a plain authored link, styled here rather than relying on
+   the global button convention, which needs authored bold formatting we cannot get
+   from a modelled field */
+header nav .nav-tools a:any-link {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 8px 20px;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+header nav .nav-tools a:hover,
+header nav .nav-tools a:focus-visible {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  text-decoration: none;
 }

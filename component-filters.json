@@ -20,7 +20,8 @@
       "fragment",
       "quote",
       "callout",
-      "callout-list"
+      "callout-list",
+      "navigation"
     ]
   },
   {
@@ -62,6 +63,12 @@
     "id": "custom-columns",
     "components": [
       "single-column"
+    ]
+  },
+  {
+    "id": "navigation",
+    "components": [
+      "nav-link"
     ]
   },
   {

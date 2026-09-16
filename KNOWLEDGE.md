@@ -136,7 +136,14 @@ Vedi file dedicato `UE_terminologia_component-definition.md` per il dettaglio di
   - **Campo dimensione:** `column-stack` usa un `select` con opzioni fisse (s/m/l/xl); `custom-columns` usa un campo di testo libero, gestito solo con un `.toLowerCase()` — nessuna validazione su refusi, spazi, o valori non previsti (se l'autore sbaglia, semplicemente non viene applicato nessuno stile, senza errore visibile).
   - **Conclusione:** `column-stack` è la versione più matura/robusta (probabilmente la seconda iterazione, con la lezione imparata su cosa non fare); `custom-columns` è il prototipo più fragile. Da preferire `column-stack` come riferimento per pattern futuri di nesting in questo repo; `custom-columns` resta comunque utile come esempio didattico di "nesting reale nel DOM" contro "nesting simulato via CSS".
 - [ ] Perché `dompurify.min.js` nel block `article` — che tipo di contenuto HTML "libero" gestisce?
-- [ ] Verificare se `npm run build:json` è configurato/funzionante nel repo di test
+- [x] Verificare se `npm run build:json` è configurato/funzionante nel repo di test — sì, funzionante (usato per `callout`/`callout-list`, vedi §9-bis/9-ter)
+- [x] **Errori lint CRLF (1943 errori `linebreak-style`) — risolti (16 settembre 2026).** Il commit "fix gitattributes" del 15 settembre aveva aggiunto `* text=auto eol=lf` a `.gitattributes`, ma non bastava: i file già presenti nella working copy non venivano ri-scritti automaticamente, e soprattutto **`core.autocrlf=true`** (config locale di git su questa macchina Windows) faceva sì che git considerasse i file CRLF-su-disco e LF-nel-commit come "equivalenti", quindi anche un `git checkout HEAD -- .` non li riscriveva. Fix definitivo eseguito dall'utente da terminale:
+  ```
+  git config core.autocrlf false   # solo per questo repo, non la config globale
+  git rm --cached -r .
+  git reset --hard
+  ```
+  Dopo questo, `npm run lint` risulta pulito (0 errori). Utile ricordarlo se in futuro si ri-clona il repo su un'altra macchina Windows con `core.autocrlf=true` di default.
 
 ---
 

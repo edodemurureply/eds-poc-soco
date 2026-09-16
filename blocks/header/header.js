@@ -1,4 +1,5 @@
 import { getMetadata } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -118,38 +119,61 @@ export default async function decorate(block) {
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
-  // decorate nav DOM
+  // the navigation block models the whole nav: brand and cta first, then one row per link
+  const navigation = fragment?.querySelector('.navigation');
+  if (!navigation) return;
+  const [brandRow, ctaRow, ...linkRows] = navigation.children;
+
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
-  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
-  classes.forEach((c, i) => {
-    const section = nav.children[i];
-    if (section) section.classList.add(`nav-${c}`);
+  // brand is authored as a label only; its destination is always the home page
+  const navBrand = document.createElement('div');
+  navBrand.className = 'nav-brand';
+  const brandText = brandRow?.textContent.trim();
+  if (brandText) {
+    const brandLink = document.createElement('a');
+    brandLink.href = '/';
+    brandLink.textContent = brandText;
+    moveInstrumentation(brandRow, brandLink);
+    navBrand.append(brandLink);
+  }
+
+  const navSections = document.createElement('div');
+  navSections.className = 'nav-sections';
+  const linkList = document.createElement('ul');
+  linkRows.forEach((row) => {
+    const link = row.querySelector('a');
+    if (!link) return;
+    const item = document.createElement('li');
+    moveInstrumentation(row, item);
+    item.append(link);
+    linkList.append(item);
+  });
+  navSections.append(linkList);
+
+  // the link to the page being viewed becomes a non-interactive "you are here" marker
+  navSections.querySelectorAll('a[href]').forEach((link) => {
+    if (link.pathname === window.location.pathname) {
+      link.setAttribute('aria-current', 'page');
+      link.removeAttribute('href');
+    }
   });
 
-  const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
+  const navTools = document.createElement('div');
+  navTools.className = 'nav-tools';
+  const cta = ctaRow?.querySelector('a');
+  if (cta) {
+    moveInstrumentation(ctaRow, cta);
+    navTools.append(cta);
   }
 
-  const navSections = nav.querySelector('.nav-sections');
-  if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        }
-      });
-    });
-  }
+  // sections and tools share one pill container on desktop
+  const navGroup = document.createElement('div');
+  navGroup.className = 'nav-group';
+  navGroup.append(navSections, navTools);
+  nav.append(navBrand, navGroup);
 
   // hamburger for mobile
   const hamburger = document.createElement('div');

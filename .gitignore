@@ -14,3 +14,6 @@ helix-importer-ui
 
 # Contesto locale, mai da pushare
 EDS_GUIDA_PRATICA_UFFICIALE.md
+
+# Contenuto finto per i test locali (aem up --html-folder drafts)
+drafts/
