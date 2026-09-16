@@ -12,8 +12,5 @@ helix-importer-ui
 !CLAUDE.md
 !AGENTS.md
 
-# Contesto locale, mai da pushare
-EDS_GUIDA_PRATICA_UFFICIALE.md
-
 # Contenuto finto per i test locali (aem up --html-folder drafts)
 drafts/
