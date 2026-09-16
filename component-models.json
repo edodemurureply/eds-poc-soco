@@ -451,13 +451,28 @@
         "name": "author",
         "label": "Author",
         "value": ""
-      },
+      }
+    ]
+  },
+  {
+    "id": "related-content",
+    "fields": [
       {
         "component": "text",
         "valueType": "string",
-        "name": "testmulti",
-        "label": "TEST multi-field",
-        "multi": true
+        "name": "heading",
+        "label": "Titolo",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "pages",
+        "label": "Pagine",
+        "description": "Le pagine da mostrare. Solo pagine pubblicate: quelle in sola anteprima non compaiono.",
+        "multi": true,
+        "validation": {
+          "rootPath": "/content/eds-poc-soco-2"
+        }
       }
     ]
   }

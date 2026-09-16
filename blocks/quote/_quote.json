@@ -35,13 +35,6 @@
           "name": "author",
           "label": "Author",
           "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "testmulti",
-          "label": "TEST multi-field",
-          "multi": true
         }
       ]
     }
