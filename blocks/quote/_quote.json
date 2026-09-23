@@ -10,8 +10,8 @@
             "template": {
               "name": "Quote",
               "model": "quote",
-              "quote": "<p>Think, McFly! Think!</p>",
-              "author": "Biff Tannen"
+              "content_quote": "Quote text",
+              "content_attribution": "Name, role"
             }
           }
         }
@@ -23,18 +23,49 @@
       "id": "quote",
       "fields": [
         {
-          "component": "richtext",
-          "name": "quote",
+          "component": "textarea",
+          "name": "content_quote",
           "value": "",
           "label": "Quote",
+          "valueType": "string",
+          "required": true
+        },
+        {
+          "component": "text",
+          "name": "content_attribution",
+          "value": "",
+          "label": "Attribution",
+          "valueType": "string",
+          "required": true
+        },
+        {
+          "component": "reference",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "imageAlt",
+          "label": "Image Alt Text",
           "valueType": "string"
         },
         {
           "component": "text",
+          "name": "backgroundColor",
+          "label": "Background Color",
+          "description": "Hex color, e.g. #1a4d8f. Text becomes white when set.",
           "valueType": "string",
-          "name": "author",
-          "label": "Author",
-          "value": ""
+          "validation": {
+            "regExp": "^#[0-9a-fA-F]{6}$",
+            "customErrorMsg": "Use a hex color in the #RRGGBB format"
+          }
+        },
+        {
+          "component": "boolean",
+          "name": "classes_fullwidth",
+          "label": "Full Width",
+          "valueType": "boolean"
         }
       ]
     }

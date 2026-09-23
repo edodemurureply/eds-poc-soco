@@ -397,8 +397,8 @@
                 "template": {
                   "name": "Quote",
                   "model": "quote",
-                  "quote": "<p>Think, McFly! Think!</p>",
-                  "author": "Biff Tannen"
+                  "content_quote": "Quote text",
+                  "content_attribution": "Name, role"
                 }
               }
             }
