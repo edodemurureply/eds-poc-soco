@@ -439,12 +439,13 @@
     "id": "quote",
     "fields": [
       {
-        "component": "textarea",
+        "component": "richtext",
         "name": "content_quote",
         "value": "",
         "label": "Quote",
         "valueType": "string",
-        "required": true
+        "required": true,
+        "description": "Press Enter for a new line. Do not type quotation marks: they are added automatically."
       },
       {
         "component": "text",

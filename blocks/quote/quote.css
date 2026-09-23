@@ -1,45 +1,96 @@
+/* full width: the block wrapper drops the section max-width and padding */
+main .quote-wrapper:has(> .quote.fullwidth) {
+  max-width: none;
+  padding: 0;
+}
+
+.quote {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.quote .quote-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.quote .quote-content {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 24px 0;
+}
+
+.quote.has-background .quote-content,
+.quote.fullwidth .quote-content {
+  padding: 24px;
+}
+
 .quote blockquote {
-  margin: 0 auto;
-  padding: 0 24px;
-  max-width: 900px;
-}
-
-@media (width >= 900px) {
-  .quote blockquote {
-    padding: 0 32px;
-  }
-}
-
-.quote blockquote .quote-quotation {
-  font-size: 120%;
+  margin: 0 0 24px;
   font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25em;
+  color: var(--dark-color);
 }
 
-.quote blockquote .quote-quotation > :first-child {
-  text-indent: -0.5ch;
+.quote blockquote p {
+  margin: 0;
 }
 
-.quote blockquote .quote-quotation > :first-child::before,
-.quote blockquote .quote-quotation > :last-child::after {
-  line-height: 0;
+.quote blockquote p + p {
+  margin-top: 0.5em;
 }
 
-.quote blockquote .quote-quotation > :first-child::before {
+.quote .quote-attribution {
+  font-size: var(--body-font-size-xs);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.quote .quote-attribution p {
+  margin: 0;
+}
+
+.quote .quote-attribution p::before {
+  content: "— ";
+}
+
+.quote blockquote > p:first-child::before {
   content: "“";
 }
 
-.quote blockquote .quote-quotation > :last-child::after {
+.quote blockquote > p:last-child::after {
   content: "”";
 }
 
-.quote blockquote .quote-attribution {
-  text-align: right;
-  font-weight: 400;
-  font-style: italic;
-  color: #7a7a7a;
+/* background color is set inline by quote.js; text turns white, as in the legacy component */
+.quote.has-background blockquote,
+.quote.has-background .quote-attribution {
+  color: var(--background-color);
 }
 
-.quote blockquote .quote-attribution > :first-child::before {
-  content: "—";
-  padding-right: 0.5ch;
+@media (width >= 900px) {
+  .quote.has-image {
+    flex-direction: row-reverse;
+    min-height: 510px;
+  }
+
+  .quote.has-image .quote-image,
+  .quote.has-image .quote-content {
+    flex: 0 0 50%;
+  }
+
+  .quote.has-image .quote-image img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .quote.has-image .quote-content {
+    padding: 32px;
+  }
 }
