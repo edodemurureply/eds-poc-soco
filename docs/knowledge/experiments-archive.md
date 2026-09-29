@@ -1,10 +1,9 @@
-# KNOWLEDGE.md — Compendio Conoscenze e Avanzamenti (EDS + Universal Editor)
+# Archivio esperimenti EDS + Universal Editor (ex KNOWLEDGE.md)
 
-> File di supporto ad `AGENTS.md`. `AGENTS.md` dice all'agente **come comportarsi** nel progetto;
-> questo file tiene traccia di **cosa sappiamo, da dove viene l'informazione, e a che punto siamo**.
-> Aggiornalo man mano che si procede (sia da Claude.ai che da Claude Code).
->
-> Per il flusso pratico passo-passo (editing, publish, quali URL controllare) vedi `FLOW.md`.
+> **Archivio storico, settembre 2026.** Diario degli esperimenti di studio su questo repo.
+> Non è contesto di lavoro: leggerlo solo se serve la storia di un esperimento.
+> Lezioni tecniche riutilizzabili: `eds-ue-lessons.md`. Flusso pratico di test: `FLOW.md`.
+> Alcune informazioni sono superate (vedi le note ⚠️ nel testo).
 
 ---
 
@@ -77,7 +76,7 @@ con la stessa struttura di un progetto reale, per fare pratica libera.
 
 ## 5. Terminologia UE (component-definition)
 
-Vedi file dedicato `UE_terminologia_component-definition.md` per il dettaglio di:
+Vedi file dedicato `UE_terminologia_component-definition.md` (fuori dal repo, in `C:\Users\091\src\job\reply\IA\`) per il dettaglio di:
 - `component-definition.json` → Definitions (cosa esiste)
 - `component-models.json` → Models (che campi sono editabili)
 - `component-filters.json` → Filters (cosa è droppabile dove)
@@ -158,20 +157,7 @@ Seguito il tutorial ufficiale [Creating Blocks for Universal Editor](https://www
 - Aggiunto `"quote"` alla lista componenti permessi in `models/_section.json` (filtro della section standard)
 - Rigenerato con `npm run build:json`
 
-**Workflow di test stabilito (da ripetere per ogni nuovo blocco)** — versione dettagliata con tutti gli URL in `FLOW.md`:
-1. Sviluppare il block (json/js/css)
-2. Commit + push del branch di lavoro (mai in `main` — vedi nota sotto)
-3. Creare/usare una pagina dedicata in Sites Console + Universal Editor
-4. Aprire l'editor con `?ref=<branch>` in coda all'URL (altrimenti l'editor legge i componenti/codice da `main` e il nuovo block non compare/non aggiorna). Attenzione: l'URL del **canvas** dell'Universal Editor (quello aperto in modalità "Edit", con vista live della pagina) ha una forma diversa da quello della Sites Console, es.:
-   `https://<author-host>/ui#/@<org-slug>/aem/universal-editor/canvas/<author-host>/content/<site>/index/<page>.html?ref=<branch>`
-   (il `?ref=` va aggiunto in fondo a **questo** URL, non a quello con `sites.html`)
-5. Aggiungere il componente, personalizzare i campi, pubblicare in **Anteprima** (mai "Live")
-6. Verificare via `curl <preview-url>/index/<page-name>.md` e `.html`
-
-**Nota sul path delle pagine:** le pagine create in Sites Console sotto la root del sito risultano raggiungibili come `/index/<nome-pagina>` in preview/live (non `/<nome-pagina>` diretto) — es. pagina `test-quote` → `https://<branch>--eds-poc-soco--edodemurureply.aem.page/index/test-quote`.
-
-**Nota sui nomi branch con `/` nell'URL di preview/live:** un subdominio DNS non può contenere `/`, quindi se il nome del branch ha uno slash (es. `feature/ue-tutorial`, come da convenzione adottata in questo repo), Code Sync lo traduce sostituendo `/` con `-` nel subdominio `.aem.page`/`.aem.live`:
-`feature/ue-tutorial` → `feature-ue-tutorial` → `https://feature-ue-tutorial--eds-poc-soco--edodemurureply.aem.page/...`
+Workflow di test (sviluppo → push → UE con `?ref=` → Anteprima → verifica), path `/index/` e slash del branch nel subdominio: ora in `FLOW.md` e `eds-ue-lessons.md`.
 
 **Testato su:** branch `feature/ue-tutorial`, pagina `test-quote`, pubblicato in anteprima. ✅ Funzionante end-to-end.
 
@@ -181,7 +167,9 @@ Seguito il tutorial ufficiale [Creating Blocks for Universal Editor](https://www
 - **Punto aperto/da approfondire:** nel markup pubblicato reale (verificato via `curl`) le celle contengono solo testo puro, senza tag `<p>` interno — per le regole CSS standard i selettori `> :first-child::before` richiederebbero un elemento figlio per generare lo pseudo-elemento. Visivamente virgolette/trattino comparivano comunque nel browser: non abbiamo risolto la discrepanza fino in fondo (rimandato, non bloccante)
 - Nessuna delle due versioni del JS chiama `moveInstrumentation()` — da verificare se l'editing in-place post-decorazione resta affidabile in UE (rilevante soprattutto per la v2, che sposta nodi esistenti)
 
-**Regola importante:** `CLAUDE.md`, `KNOWLEDGE.md` e `AGENTS.md` non vanno **mai** pushati/mergiati in `main` — restano solo sui branch di lavoro/pratica.
+⚠️ **Superato:** il `quote` descritto qui è quello del tutorial. Il `quote` attuale nel codice è la versione Southern Company con parità funzionale al legacy (fine settembre 2026).
+
+~~**Regola importante:** `CLAUDE.md`, `KNOWLEDGE.md` e `AGENTS.md` non vanno **mai** pushati/mergiati in `main`.~~ ⚠️ **Revocata il 23/09/2026**: i file di contesto stanno su `main`.
 
 ---
 
@@ -241,12 +229,5 @@ Aggiunto `"callout-list"` ai filtri di `_section.json`, rigenerato con `npm run 
 
 ---
 
-## 10. Come usare questo file nel workflow
-
-- **Claude.ai (questo progetto):** teoria, roadmap, decisioni — aggiorna le sezioni 4, 5, 8
-- **Claude Code (repo locale):** esplorazione pratica, codice — aggiorna le sezioni 6, 7
-- Prima di ogni sessione di lavoro pratico, porta l'ultima versione di questo file in Claude Code come contesto
-- Dopo ogni sessione, riporta qui (anche solo a voce, in chat) cosa è stato scoperto/fatto, così l'aggiorniamo insieme
-
 ---
-*Ultimo aggiornamento: 15 settembre 2026 (aggiunta §9-bis `callout`, §9-ter `callout-list`)*
+*Archiviato il 29 settembre 2026. Ultimo aggiornamento del contenuto: 16 settembre 2026. Il flusso Claude.ai ↔ Claude Code (ex §10) è in `CLAUDE.md`.*

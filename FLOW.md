@@ -1,23 +1,22 @@
 # FLOW.md — Flusso di lavoro: modifica, editing, verifica
 
 > Guida pratica passo-passo per fare una modifica (es. nuovo block) e verificarla,
-> con tutti gli URL coinvolti e a cosa serve ciascuno. Vedi anche `KNOWLEDGE.md` §9
-> per il log di cosa è stato fatto finora.
+> con tutti gli URL coinvolti e a cosa serve ciascuno. Trappole tecniche: `docs/knowledge/eds-ue-lessons.md`.
 
 ---
 
-## URL pronti all'uso (questo progetto, branch `feature/ue-tutorial`)
+## URL pronti all'uso (questo progetto)
 
-Sostituisci solo `<pagina>` (es. `test-quote`, `test-callout-list`).
+Sostituisci `<pagina>` (es. `test-quote`) e `<branch>` (es. `feature/nome`); in `<branch-con-trattini>` lo `/` diventa `-` (`feature-nome`).
 Le pagine sotto la radice del sito stanno in `index/`; `nav` invece sta alla radice.
 
 | Dove | URL |
 |---|---|
 | **Sviluppo locale** (`aem up` attivo) | `http://localhost:3000/index/<pagina>` |
 | **Sites Console** — trovare/creare pagine | `https://author-p42403-e1312991.adobeaemcloud.com/ui#/aem/sites.html/content/eds-poc-soco-2` |
-| **Editing in UE** — una pagina normale | `https://author-p42403-e1312991.adobeaemcloud.com/ui#/@aktivereplyemeaptrsd/aem/universal-editor/canvas/author-p42403-e1312991.adobeaemcloud.com/content/eds-poc-soco-2/index/<pagina>.html?ref=feature/ue-tutorial` |
-| **Editing in UE** — la navbar | `https://author-p42403-e1312991.adobeaemcloud.com/ui#/@aktivereplyemeaptrsd/aem/universal-editor/canvas/author-p42403-e1312991.adobeaemcloud.com/content/eds-poc-soco-2/nav.html?ref=feature/ue-tutorial` |
-| **Preview del branch** (dopo "Pubblica → Anteprima") | `https://feature-ue-tutorial--eds-poc-soco--edodemurureply.aem.page/index/<pagina>` |
+| **Editing in UE** — una pagina normale | `https://author-p42403-e1312991.adobeaemcloud.com/ui#/@aktivereplyemeaptrsd/aem/universal-editor/canvas/author-p42403-e1312991.adobeaemcloud.com/content/eds-poc-soco-2/index/<pagina>.html?ref=<branch>` |
+| **Editing in UE** — la navbar | `https://author-p42403-e1312991.adobeaemcloud.com/ui#/@aktivereplyemeaptrsd/aem/universal-editor/canvas/author-p42403-e1312991.adobeaemcloud.com/content/eds-poc-soco-2/nav.html?ref=<branch>` |
+| **Preview del branch** (dopo "Pubblica → Anteprima") | `https://<branch-con-trattini>--eds-poc-soco--edodemurureply.aem.page/index/<pagina>` |
 | **Live / produzione** (solo dopo merge in `main`) | `https://main--eds-poc-soco--edodemurureply.aem.live/index/<pagina>` |
 
 **Spostarsi tra pagine restando nell'editor:** il canvas di UE è legato a una singola pagina e non ha un navigatore interno. Invece di tornare alla Sites Console, modifica direttamente il percorso dentro l'URL del canvas — la parte `/content/eds-poc-soco-2/<percorso-pagina>.html` — e ricarica.
@@ -30,7 +29,7 @@ npx @adobe/aem-cli up --no-open --html-folder drafts --html-mount / --prefer-pla
 
 **Contenuto del tuo branch invece che di `main` in locale:** di default `aem up` prende i contenuti dal preview di `main`, quindi le pagine pubblicate solo sul tuo branch non si vedono (o si vedono nella versione vecchia). Per puntarlo al tuo branch:
 ```
-npx @adobe/aem-cli up --no-open --url https://feature-ue-tutorial--eds-poc-soco--edodemurureply.aem.page
+npx @adobe/aem-cli up --no-open --url https://<branch-con-trattini>--eds-poc-soco--edodemurureply.aem.page
 ```
 Così hai **codice locale + contenuto del branch**, che è la combinazione giusta per sviluppare dopo aver pubblicato in Anteprima.
 
@@ -80,9 +79,9 @@ Vai sull'URL del **canvas** dell'Universal Editor, che punta all'istanza **autho
 https://<author-host>/ui#/@<org-slug>/aem/universal-editor/canvas/<author-host>/content/<sito>/index/<pagina>.html?ref=<branch>
 ```
 
-Esempio concreto usato finora:
+Esempio concreto (solo esempio, branch `feature/quote-sc`):
 ```
-https://author-p42403-e1312991.adobeaemcloud.com/ui#/@aktivereplyemeaptrsd/aem/universal-editor/canvas/author-p42403-e1312991.adobeaemcloud.com/content/eds-poc-soco-2/index/test-quote.html?ref=feature/ue-tutorial
+https://author-p42403-e1312991.adobeaemcloud.com/ui#/@aktivereplyemeaptrsd/aem/universal-editor/canvas/author-p42403-e1312991.adobeaemcloud.com/content/eds-poc-soco-2/index/test-quote.html?ref=feature/quote-sc
 ```
 
 Note importanti su questo URL:
@@ -106,15 +105,15 @@ Ora guarda il contenuto pubblicato tramite l'URL di **delivery/preview** (`.aem.
 che è tutt'altra cosa dall'URL author usato al Passo 3:
 
 ```
-https://<branch>--<repo>--<owner>.aem.page/index/<pagina>
+https://<branch-con-trattini>--<repo>--<owner>.aem.page/index/<pagina>
 ```
 
 ⚠️ **Attenzione alla trasformazione del nome branch:** un subdominio DNS non può contenere `/`.
-Se il branch si chiama `feature/ue-tutorial` (con lo slash, come da nostra convenzione),
-nell'URL diventa `feature-ue-tutorial` (slash → trattino):
+Se il branch si chiama `feature/nome` (con lo slash, come da nostra convenzione),
+nell'URL diventa `feature-nome` (slash → trattino):
 
 ```
-https://feature-ue-tutorial--eds-poc-soco--edodemurureply.aem.page/index/test-quote
+https://feature-nome--eds-poc-soco--edodemurureply.aem.page/index/test-quote
 ```
 
 ⚠️ **Attenzione al path della pagina:** le pagine create alla root del sito in Sites Console
@@ -142,7 +141,7 @@ https://main--eds-poc-soco--edodemurureply.aem.live/index/<pagina>
 | Dev locale | `localhost:3000` | `http://localhost:3000/index/test-quote` |
 | Editing WYSIWYG (Universal Editor canvas) | `<author-host>.adobeaemcloud.com` | `.../ui#/@org/aem/universal-editor/canvas/...?ref=<branch>` |
 | Navigazione/creazione pagine (Sites Console) | `<author-host>.adobeaemcloud.com` | `.../ui#/aem/sites.html/content/<sito>` |
-| Verifica contenuto pubblicato in Anteprima | `<branch>--<repo>--<owner>.aem.page` | `https://feature-ue-tutorial--eds-poc-soco--edodemurureply.aem.page/index/test-quote` |
+| Verifica contenuto pubblicato in Anteprima | `<branch>--<repo>--<owner>.aem.page` | `https://<branch-con-trattini>--eds-poc-soco--edodemurureply.aem.page/index/test-quote` |
 | Verifica contenuto pubblicato in Live (produzione) | `main--<repo>--<owner>.aem.live` | `https://main--eds-poc-soco--edodemurureply.aem.live/index/test-quote` |
 
 Regola pratica: **author = dove editi**, **`.aem.page`/`.aem.live` = dove verifichi cosa hanno visto/vedranno gli utenti**.
@@ -151,11 +150,11 @@ Regola pratica: **author = dove editi**, **`.aem.page`/`.aem.live` = dove verifi
 
 ## 3. Errori comuni (già incontrati)
 
-- Scrivere lo slash del branch letteralmente nell'URL `.aem.page` (es. `https://feature/ue-tutorial--...`) → URL rotto, il browser interpreta male host/path. Va sostituito con `-`.
+- Scrivere lo slash del branch letteralmente nell'URL `.aem.page` (es. `https://feature/nome--...`) → URL rotto, il browser interpreta male host/path. Va sostituito con `-`.
 - Usare l'URL Sites Console (`sites.html`) invece del canvas per editare → non è la vista di editing corretta.
 - Dimenticare `?ref=<branch>` sull'URL del canvas → l'editor mostra `main`, il nuovo componente non appare.
 - Aprire `/<pagina>` invece di `/index/<pagina>` sulla preview → 404 "Not Found".
 - Pubblicare in "Live" invece che "Anteprima" durante i test → da evitare in questa fase.
 
 ---
-*Creato: 15 settembre 2026 — vedi `KNOWLEDGE.md` per il log di avanzamento e `AGENTS.md` per le regole del progetto.*
+*Creato: 15 settembre 2026. Regole del progetto: `AGENTS.md`. Storia degli esperimenti: `docs/knowledge/experiments-archive.md`.*
