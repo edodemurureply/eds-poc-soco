@@ -1,0 +1,13 @@
+.image figure {
+  margin: 0;
+}
+
+.image picture,
+.image img {
+  display: block;
+  max-width: 100%;
+}
+
+.image img {
+  height: auto;
+}
