@@ -8,7 +8,7 @@
           "page": {
             "resourceType": "core/franklin/components/image/v1/image",
             "template": {
-              "model": "image-simple"
+              "model": "image"
             }
           }
         }
@@ -17,7 +17,7 @@
   ],
   "models": [
     {
-      "id": "image-simple",
+      "id": "image",
       "fields": [
         {
           "component": "reference",

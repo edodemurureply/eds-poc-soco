@@ -24,7 +24,7 @@
     ]
   },
   {
-    "id": "image-simple",
+    "id": "image",
     "fields": [
       {
         "component": "reference",
@@ -394,7 +394,7 @@
     ]
   },
   {
-    "id": "image",
+    "id": "image-block",
     "fields": [
       {
         "component": "reference",
