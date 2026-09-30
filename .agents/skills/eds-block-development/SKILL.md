@@ -18,9 +18,7 @@ Commands and hard rules are in the repository's `AGENTS.md`.
 
 ## Steps
 1. Inspect the current block, its partial model, section filters, and representative authored markup before deciding what to change. For migration work, inspect the matching legacy component as read-only reference.
-2. Define the author-facing content structure and observable behavior. Prefer an existing block pattern where it fits; keep optional or missing fields safe. If the structure changes, account for existing content. For known UE and model pitfalls, consult the relevant section of `docs/knowledge/eds-ue-lessons.md`.
+2. Define the author-facing content structure and observable behavior. Prefer an existing block pattern where it fits; keep optional or missing fields safe. If the structure changes, account for existing content. For known UE and model pitfalls, consult the relevant section of `docs/knowledge/eds-ue-lessons.md`. For definitions, models, filters and field types, use the `ue-component-model` skill; for designing the content model, use the `content-modeling` skill.
 3. Implement the smallest block or model change that satisfies the request. Keep decoration in `blocks/<name>/<name>.js`, block styles in `blocks/<name>/<name>.css`, and Universal Editor definitions in the relevant partial JSON file.
 4. After changing partial models or filters, run `npm run build:json`. Run `npm run lint` for code or model changes.
 5. Validate against representative content. Use the local AEM server and a browser when the change affects rendered or interactive behavior; check mobile and desktop layouts and authoring behavior when relevant. For Universal Editor and preview testing (URLs, `?ref=<branch>`, publish to Preview only), follow `FLOW.md`. Report any validation that could not be performed.
-
-Do not edit `scripts/aem.js`. Do not alter the legacy repository. Follow the project's Git rule: stage only task-related files and leave the commit to the user.
