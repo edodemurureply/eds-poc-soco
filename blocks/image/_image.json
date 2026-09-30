@@ -45,6 +45,17 @@
           "multi": false
         },
         {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Options",
+          "options": [
+            {
+              "name": "Hide on mobile",
+              "value": "hide-mobile"
+            }
+          ]
+        },
+        {
           "component": "boolean",
           "valueType": "boolean",
           "name": "isDecorative",

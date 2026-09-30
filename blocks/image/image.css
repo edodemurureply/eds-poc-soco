@@ -11,3 +11,14 @@
 .image img {
   height: auto;
 }
+
+/* same breakpoint as MOBILE_MEDIA in image.js */
+.image.hide-mobile {
+  display: none;
+}
+
+@media (width >= 992px) {
+  .image.hide-mobile {
+    display: block;
+  }
+}

@@ -3,6 +3,9 @@
     "...": "./_page.json#/models"
   },
   {
+    "...": "./_image-simple.json#/models"
+  },
+  {
     "...": "./_title.json#/models"
   },
   {

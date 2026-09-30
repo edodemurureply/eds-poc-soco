@@ -31,6 +31,20 @@
           }
         },
         {
+          "title": "Image (simple)",
+          "id": "image-simple",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/image/v1/image",
+                "template": {
+                  "model": "image-simple"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Button",
           "id": "button",
           "plugins": {

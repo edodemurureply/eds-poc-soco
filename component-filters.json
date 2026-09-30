@@ -55,7 +55,7 @@
     "id": "column",
     "components": [
       "text",
-      "image",
+      "image-simple",
       "button",
       "title"
     ]

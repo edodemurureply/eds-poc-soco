@@ -24,6 +24,22 @@
     ]
   },
   {
+    "id": "image-simple",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
+      }
+    ]
+  },
+  {
     "id": "title",
     "fields": [
       {
@@ -409,6 +425,17 @@
         "name": "mobileImage",
         "label": "Mobile Image",
         "multi": false
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "options": [
+          {
+            "name": "Hide on mobile",
+            "value": "hide-mobile"
+          }
+        ]
       },
       {
         "component": "boolean",
