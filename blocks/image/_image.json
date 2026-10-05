@@ -38,12 +38,6 @@
           "condition": { "!=": [{ "var": "isDecorative" }, true] }
         },
         {
-          "component": "text",
-          "valueType": "string",
-          "name": "imageTitle",
-          "label": "Image Title (test)"
-        },
-        {
           "component": "reference",
           "valueType": "string",
           "name": "mobileImage",
