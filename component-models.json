@@ -454,6 +454,23 @@
         "component": "aem-content",
         "name": "link",
         "label": "Link"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "linkTarget",
+        "label": "Open link in New Window",
+        "value": "_self",
+        "options": [
+          {
+            "name": "Same Window",
+            "value": "_self"
+          },
+          {
+            "name": "New Window",
+            "value": "_blank"
+          }
+        ]
       }
     ]
   },

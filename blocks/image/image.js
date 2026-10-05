@@ -35,6 +35,7 @@ export default function decorate(block) {
   const captionValue = value('caption');
   const caption = captionValue?.textContent.trim();
   const authoredLink = value('link')?.querySelector('a[href]');
+  const newWindow = value('linkTarget')?.textContent.trim() === '_blank';
 
   const alt = image.alt || value('imageAlt')?.textContent.trim() || '';
   const picture = createOptimizedPicture(image.src, decorative ? '' : alt);
@@ -50,6 +51,10 @@ export default function decorate(block) {
   if (authoredLink && (!decorative || caption)) {
     const link = document.createElement('a');
     link.href = authoredLink.href;
+    if (newWindow) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    }
     if (decorative) link.setAttribute('aria-label', caption);
     moveInstrumentation(authoredLink, link);
     link.append(picture);
