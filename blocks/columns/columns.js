@@ -1,6 +1,12 @@
-export default function decorate(block) {
+import restoreNestedBlocks from '../../scripts/nested-blocks.js';
+
+export default async function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
+
+  // POC: rebuild the key-value blocks authored inside the cells
+  const cells = [...block.children].flatMap((row) => [...row.children]);
+  await Promise.all(cells.map((cell) => restoreNestedBlocks(cell, 'column')));
 
   // setup image columns
   [...block.children].forEach((row) => {
