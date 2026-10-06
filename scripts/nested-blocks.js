@@ -4,6 +4,8 @@ import { decorateBlock, loadBlock, toClassName } from './aem.js';
 // flattened, as <p>key</p><p>value</p> pairs with no block wrapper.
 // The UE configuration tells which blocks a cell accepts and their field
 // names, so the block can be rebuilt and decorated as usual.
+// In UE the author markup keeps the nested block intact, but decorateBlocks()
+// only handles section-level blocks, so it is decorated here.
 
 const registry = {};
 
@@ -84,21 +86,27 @@ function buildBlock(run) {
 }
 
 /**
- * Rebuilds and loads the flattened key-value blocks of a container cell.
+ * Rebuilds (published markup) or finds (UE markup) the key-value blocks of a
+ * container cell, then decorates and loads them.
  * @param {Element} cell the container cell
  * @param {string} filterId the UE filter of the cell
  */
 export default async function restoreNestedBlocks(cell, filterId) {
   if (!registry[filterId]) registry[filterId] = loadRegistry(filterId);
   const blocks = await registry[filterId];
-  const loads = findRuns(cell, blocks).map((run) => {
+  const names = blocks.map((b) => b.name);
+  const intact = [...cell.querySelectorAll('div[class]')]
+    .filter((el) => names.includes(el.classList[0]) && !el.dataset.blockStatus);
+  const rebuilt = findRuns(cell, blocks).map((run) => {
     const wrapper = document.createElement('div');
     run.rows[0][0].before(wrapper);
     const block = buildBlock(run);
     run.rows.forEach(([key]) => key.remove());
     wrapper.append(block);
+    return block;
+  });
+  await Promise.all([...intact, ...rebuilt].map((block) => {
     decorateBlock(block);
     return loadBlock(block);
-  });
-  await Promise.all(loads);
+  }));
 }
