@@ -22,7 +22,9 @@
       "callout",
       "callout-list",
       "navigation",
-      "related-content"
+      "related-content",
+      "title-spike",
+      "title-spike-kv"
     ]
   },
   {
