@@ -1,3 +1,17 @@
 .title-spike-kv {
   display: block;
 }
+
+/* Universal Editor only: H1 that is not the first on the page */
+.title-spike-kv.title-spike-kv-extra-h1 {
+  outline: 2px dashed #c00;
+  outline-offset: 4px;
+}
+
+.title-spike-kv.title-spike-kv-extra-h1::before {
+  content: 'Second H1 on this page';
+  display: block;
+  color: #c00;
+  font-size: var(--body-font-size-xs);
+  font-weight: bold;
+}
