@@ -38,6 +38,9 @@
           "...": "../blocks/*/_*.json#/definitions"
         }
       ]
+    },
+    {
+      "...": "../global-layout/authoring/component-definition.json#/groups"
     }
   ]
 }

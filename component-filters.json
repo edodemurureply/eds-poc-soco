@@ -4,7 +4,8 @@
     "components": [
       "section",
       "section-columns",
-      "column-layout-section"
+      "column-layout-section",
+      "global-layout"
     ]
   },
   {
@@ -63,6 +64,15 @@
     "id": "section-columns",
     "components": [
       "custom-columns"
+    ]
+  },
+  {
+    "id": "global-layout",
+    "components": [
+      "global-title",
+      "global-text",
+      "global-image",
+      "teaser"
     ]
   }
 ]

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "global-layout",
+    "components": [
+      "global-title",
+      "global-text",
+      "global-image",
+      "teaser"
+    ]
+  }
+]
