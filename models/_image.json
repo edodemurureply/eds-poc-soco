@@ -1,13 +1,15 @@
 {
   "definitions": [
     {
-      "title": "Image",
-      "id": "image",
+      "title": "Image (simple)",
+      "id": "image-simple",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/image/v1/image",
-            "template": {}
+            "template": {
+              "model": "image"
+            }
           }
         }
       }

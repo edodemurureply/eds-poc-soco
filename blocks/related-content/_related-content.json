@@ -1,0 +1,45 @@
+{
+  "definitions": [
+    {
+      "title": "Contenuti correlati",
+      "id": "related-content",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Related content",
+              "model": "related-content",
+              "heading": "Contenuti correlati"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "related-content",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "heading",
+          "label": "Titolo",
+          "value": ""
+        },
+        {
+          "component": "aem-content",
+          "name": "pages",
+          "label": "Pagine",
+          "description": "Le pagine da mostrare. Solo pagine pubblicate: quelle in sola anteprima non compaiono.",
+          "multi": true,
+          "validation": {
+            "rootPath": "/content/eds-poc-soco-2"
+          }
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

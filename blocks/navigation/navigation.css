@@ -1,0 +1,13 @@
+/*
+ * Gli stili della navbar vivono in blocks/header/header.css, perche' e' li'
+ * che il markup viene ricostruito. Qui restano solo le regole utili quando la
+ * pagina /nav viene aperta da sola, come nel canvas di Universal Editor.
+ */
+.navigation {
+  font-family: var(--body-font-family);
+}
+
+.navigation ul {
+  margin: 0;
+  padding-left: 20px;
+}

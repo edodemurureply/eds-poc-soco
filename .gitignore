@@ -11,3 +11,6 @@ helix-importer-ui
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md
+
+# Contenuto finto per i test locali (aem up --html-folder drafts)
+drafts/

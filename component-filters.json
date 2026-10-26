@@ -18,7 +18,20 @@
       "hero",
       "cards",
       "columns",
-      "fragment"
+      "fragment",
+      "quote",
+      "callout",
+      "callout-list",
+      "navigation",
+      "related-content"
+    ]
+  },
+  {
+    "id": "callout-list",
+    "components": [
+      "callout-item-info",
+      "callout-item-success",
+      "callout-item-warning"
     ]
   },
   {
@@ -43,7 +56,7 @@
     "id": "column",
     "components": [
       "text",
-      "image",
+      "image-simple",
       "button",
       "title"
     ]
@@ -52,6 +65,12 @@
     "id": "custom-columns",
     "components": [
       "single-column"
+    ]
+  },
+  {
+    "id": "navigation",
+    "components": [
+      "nav-link"
     ]
   },
   {

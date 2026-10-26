@@ -1,0 +1,75 @@
+{
+  "definitions": [
+    {
+      "title": "Quote",
+      "id": "quote",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Quote",
+              "model": "quote",
+              "content_quote": "Quote text",
+              "content_attribution": "Name, role"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "quote",
+      "fields": [
+        {
+          "component": "richtext",
+          "name": "content_quote",
+          "value": "",
+          "label": "Quote",
+          "valueType": "string",
+          "required": true,
+          "description": "Press Enter for a new line. Do not type quotation marks: they are added automatically."
+        },
+        {
+          "component": "text",
+          "name": "content_attribution",
+          "value": "",
+          "label": "Attribution",
+          "valueType": "string",
+          "required": true
+        },
+        {
+          "component": "reference",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "imageAlt",
+          "label": "Image Alt Text",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "backgroundColor",
+          "label": "Background Color",
+          "description": "Hex color, e.g. #1a4d8f. Text becomes white when set.",
+          "valueType": "string",
+          "validation": {
+            "regExp": "^#[0-9a-fA-F]{6}$",
+            "customErrorMsg": "Use a hex color in the #RRGGBB format"
+          }
+        },
+        {
+          "component": "boolean",
+          "name": "classes_fullwidth",
+          "label": "Full Width",
+          "valueType": "boolean"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

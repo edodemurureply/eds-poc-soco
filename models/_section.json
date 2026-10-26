@@ -50,7 +50,12 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "quote",
+        "callout",
+        "callout-list",
+        "navigation",
+        "related-content"
       ]
     }
   ]

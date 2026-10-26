@@ -190,6 +190,40 @@
     ]
   },
   {
+    "id": "callout",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "message",
+        "value": "",
+        "label": "Messaggio",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "variant",
+        "label": "Variante",
+        "valueType": "string",
+        "value": "info",
+        "required": true,
+        "options": [
+          {
+            "name": "Informazione",
+            "value": "info"
+          },
+          {
+            "name": "Successo",
+            "value": "success"
+          },
+          {
+            "name": "Attenzione",
+            "value": "warning"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -356,6 +390,202 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "image-block",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false,
+        "required": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "required": true,
+        "condition": {
+          "!=": [
+            {
+              "var": "isDecorative"
+            },
+            true
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "mobileImage",
+        "label": "Mobile Image",
+        "multi": false
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "options": [
+          {
+            "name": "Hide on mobile",
+            "value": "hide-mobile"
+          }
+        ]
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "isDecorative",
+        "label": "Decorative",
+        "value": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "caption",
+        "label": "Caption"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "linkTarget",
+        "label": "Open link in New Window",
+        "value": "_self",
+        "options": [
+          {
+            "name": "Same Window",
+            "value": "_self"
+          },
+          {
+            "name": "New Window",
+            "value": "_blank"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "navigation",
+    "fields": [
+      {
+        "component": "text",
+        "name": "brand",
+        "label": "Brand",
+        "description": "Testo mostrato in alto a sinistra. Punta sempre alla home."
+      },
+      {
+        "component": "aem-content",
+        "name": "cta",
+        "label": "Link in evidenza — destinazione",
+        "validation": {
+          "rootPath": "/content/eds-poc-soco-2"
+        }
+      },
+      {
+        "component": "text",
+        "name": "ctaText",
+        "label": "Link in evidenza — testo"
+      }
+    ]
+  },
+  {
+    "id": "nav-link",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Destinazione",
+        "validation": {
+          "rootPath": "/content/eds-poc-soco-2"
+        }
+      },
+      {
+        "component": "text",
+        "name": "linkText",
+        "label": "Testo"
+      }
+    ]
+  },
+  {
+    "id": "quote",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "content_quote",
+        "value": "",
+        "label": "Quote",
+        "valueType": "string",
+        "required": true,
+        "description": "Press Enter for a new line. Do not type quotation marks: they are added automatically."
+      },
+      {
+        "component": "text",
+        "name": "content_attribution",
+        "value": "",
+        "label": "Attribution",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "backgroundColor",
+        "label": "Background Color",
+        "description": "Hex color, e.g. #1a4d8f. Text becomes white when set.",
+        "valueType": "string",
+        "validation": {
+          "regExp": "^#[0-9a-fA-F]{6}$",
+          "customErrorMsg": "Use a hex color in the #RRGGBB format"
+        }
+      },
+      {
+        "component": "boolean",
+        "name": "classes_fullwidth",
+        "label": "Full Width",
+        "valueType": "boolean"
+      }
+    ]
+  },
+  {
+    "id": "related-content",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Titolo",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "pages",
+        "label": "Pagine",
+        "description": "Le pagine da mostrare. Solo pagine pubblicate: quelle in sola anteprima non compaiono.",
+        "multi": true,
+        "validation": {
+          "rootPath": "/content/eds-poc-soco-2"
+        }
       }
     ]
   },
