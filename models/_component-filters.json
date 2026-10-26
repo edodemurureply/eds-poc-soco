@@ -4,7 +4,8 @@
     "components": [
       "section",
       "section-columns",
-      "column-layout-section"
+      "column-layout-section",
+      "global-layout"
     ]
   },
   {
@@ -15,5 +16,8 @@
   },
   {
     "...": "./custom-section/_*.json#/filters"
+  },
+  {
+    "...": "../global-layout/authoring/component-filters.json"
   }
 ]

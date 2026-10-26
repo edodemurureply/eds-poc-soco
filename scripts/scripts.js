@@ -10,6 +10,7 @@ import {
   loadSections,
   loadCSS,
 } from './aem.js';
+import { decorateGlobalLayout } from '../global-layout/index.js';
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -119,6 +120,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateGlobalLayout(main);
   decorateButtons(main);
 }
 

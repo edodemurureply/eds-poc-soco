@@ -6,3 +6,8 @@ package.json
 package-lock.json
 test/*
 _*
+global-layout/test/
+global-layout/tools/
+global-layout/example/
+global-layout/integration/
+global-layout/authoring/

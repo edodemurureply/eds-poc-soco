@@ -22,5 +22,8 @@
   },
   {
     "...": "../blocks/*/_*.json#/models"
+  },
+  {
+    "...": "../global-layout/authoring/component-models.json"
   }
 ]
