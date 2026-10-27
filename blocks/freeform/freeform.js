@@ -2,10 +2,16 @@
 
 // a paste is stored as one <p> per line, the code escaped as text: rebuild it line by line
 function readSource(field) {
+  /* eslint-disable no-console */
+  console.log('[freeform-spike] readSource field.innerHTML:', field.innerHTML);
   const lines = field.children.length
     ? [...field.children].map((el) => el.textContent)
     : [field.textContent];
-  return lines.join('\n').trim();
+  console.log('[freeform-spike] readSource lines:', lines);
+  const source = lines.join('\n').trim();
+  console.log(`[freeform-spike] readSource source:\n${source}`);
+  /* eslint-enable no-console */
+  return source;
 }
 
 // scripts set through innerHTML never run: recreate each, in order, waiting for external ones
