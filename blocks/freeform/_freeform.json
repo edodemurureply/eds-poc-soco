@@ -21,7 +21,7 @@
       "id": "freeform",
       "fields": [
         {
-          "component": "richtext",
+          "component": "textarea",
           "name": "html",
           "value": "",
           "label": "HTML",
