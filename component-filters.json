@@ -75,9 +75,18 @@
     ],
     "rte": {
       "toolbar": {
+        "format": [],
+        "alignment": [],
+        "direction": [],
+        "indentation": [],
+        "blocks": [],
+        "list": [],
+        "insert": [],
+        "sr_script": [],
         "editor": [
           "paste_text"
-        ]
+        ],
+        "advanced": []
       }
     }
   },
