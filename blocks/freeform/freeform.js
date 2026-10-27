@@ -1,12 +1,14 @@
 // Spike: render pasted HTML; scripts run on preview/live only, never in Universal Editor
 
-// a paste is stored as one <p> per line, the code escaped as text: rebuild it line by line
+// a paste is stored as escaped text, lines split by <p> or by <br>: rebuild it line by line
 function readSource(field) {
   /* eslint-disable no-console */
   console.log('[freeform-spike] readSource field.innerHTML:', field.innerHTML);
-  const lines = field.children.length
-    ? [...field.children].map((el) => el.textContent)
-    : [field.textContent];
+  const copy = field.cloneNode(true);
+  copy.querySelectorAll('br').forEach((br) => br.replaceWith('\n'));
+  const lines = copy.children.length
+    ? [...copy.children].map((el) => el.textContent)
+    : [copy.textContent];
   console.log('[freeform-spike] readSource lines:', lines);
   const source = lines.join('\n').trim();
   console.log(`[freeform-spike] readSource source:\n${source}`);
