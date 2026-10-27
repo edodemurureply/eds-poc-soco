@@ -22,6 +22,29 @@ function captureWrites() {
   document.writeln = (...html) => { written += `${html.join('')}\n`; };
 }
 
+// scripts run after the page is ready, so DOMContentLoaded (and load, once complete) never
+// reaches them: call those listeners right away instead of waiting forever
+function runReadyListenersNow() {
+  [document, window].forEach((target) => {
+    if (Object.hasOwn(target, 'addEventListener')) return;
+    const add = target.addEventListener.bind(target);
+    target.addEventListener = (type, listener, options) => {
+      const ready = type === 'DOMContentLoaded'
+        || (type === 'load' && document.readyState === 'complete');
+      if (!ready || !listener) {
+        add(type, listener, options);
+        return;
+      }
+      /* eslint-disable-next-line no-console */
+      console.log(`[freeform-spike] ${type} listener called right away`);
+      const event = new Event(type);
+      queueMicrotask(() => (listener.handleEvent
+        ? listener.handleEvent(event)
+        : listener.call(target, event)));
+    };
+  });
+}
+
 function insertWritten(script) {
   /* eslint-disable-next-line no-console */
   console.log(`[freeform-spike] document.write captured ${written.length} chars after`, script);
@@ -68,6 +91,7 @@ export default function decorate(block) {
     if (!source) return;
     block.innerHTML = source;
     captureWrites();
+    runReadyListenersNow();
     runScripts([...block.querySelectorAll('script')]);
     return;
   }
