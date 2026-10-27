@@ -69,8 +69,10 @@
     ]
   },
   {
-    "id": "freeform",
-    "components": [],
+    "id": "freeform-html",
+    "components": [
+      "richtext"
+    ],
     "rte": {
       "unsupportedHtml": true
     }

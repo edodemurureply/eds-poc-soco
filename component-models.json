@@ -374,7 +374,14 @@
         "component": "richtext",
         "name": "html",
         "value": "",
-        "label": "HTML",
+        "label": "HTML (rich text)",
+        "valueType": "string"
+      },
+      {
+        "component": "text-area",
+        "name": "code",
+        "value": "",
+        "label": "HTML (text area)",
         "valueType": "string"
       }
     ]
