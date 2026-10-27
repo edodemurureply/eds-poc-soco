@@ -74,17 +74,18 @@
       "richtext"
     ],
     "rte": {
-      "format": [],
-      "alignment": [],
-      "direction": [],
-      "indentation": [],
-      "blocks": [],
-      "list": [],
-      "insert": [],
-      "sr_script": [],
-      "editor": [],
-      "advanced": [],
-      "sections": []
+      "toolbar": {
+        "format": [],
+        "alignment": [],
+        "direction": [],
+        "indentation": [],
+        "blocks": [],
+        "list": [],
+        "insert": [],
+        "sr_script": [],
+        "editor": [],
+        "advanced": []
+      }
     }
   },
   {
