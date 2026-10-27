@@ -1,6 +1,7 @@
 // Spike: render pasted HTML; scripts run on preview/live only, never in Universal Editor
 
-// a paste is stored as escaped text, lines split by <p> or by <br>: rebuild it line by line
+// a paste is stored as escaped text, one <p> per line; Shift+Enter splits lines with <br> instead:
+// rebuild it line by line
 function readSource(field) {
   /* eslint-disable no-console */
   console.log('[freeform-spike] readSource field.innerHTML:', field.innerHTML);
