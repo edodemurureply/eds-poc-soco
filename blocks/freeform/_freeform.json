@@ -24,28 +24,12 @@
           "component": "richtext",
           "name": "html",
           "value": "",
-          "label": "HTML (rich text)",
-          "valueType": "string"
-        },
-        {
-          "component": "text-area",
-          "name": "code",
-          "value": "",
-          "label": "HTML (text area)",
-          "valueType": "string"
+          "label": "HTML",
+          "valueType": "string",
+          "description": "Paste any HTML: markup, style, iframe, script. Scripts run on preview and live only."
         }
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "freeform-html",
-      "components": [
-        "richtext"
-      ],
-      "rte": {
-        "unsupportedHtml": true
-      }
-    }
-  ]
+  "filters": []
 }

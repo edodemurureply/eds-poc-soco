@@ -1,1 +1,13 @@
-/* Spike: no styles yet */
+/* Spike: editor-only helpers */
+.freeform .freeform-label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.freeform .freeform-render {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed currentcolor;
+}

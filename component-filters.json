@@ -69,15 +69,6 @@
     ]
   },
   {
-    "id": "freeform-html",
-    "components": [
-      "richtext"
-    ],
-    "rte": {
-      "unsupportedHtml": true
-    }
-  },
-  {
     "id": "navigation",
     "components": [
       "nav-link"
