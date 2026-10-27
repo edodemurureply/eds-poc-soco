@@ -368,6 +368,18 @@
     ]
   },
   {
+    "id": "freeform",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "html",
+        "value": "",
+        "label": "HTML",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "hero",
     "fields": [
       {

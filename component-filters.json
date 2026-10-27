@@ -23,7 +23,8 @@
       "callout",
       "callout-list",
       "navigation",
-      "related-content"
+      "related-content",
+      "freeform"
     ]
   },
   {
@@ -66,6 +67,13 @@
     "components": [
       "single-column"
     ]
+  },
+  {
+    "id": "freeform",
+    "components": [],
+    "rte": {
+      "unsupportedHtml": true
+    }
   },
   {
     "id": "navigation",
