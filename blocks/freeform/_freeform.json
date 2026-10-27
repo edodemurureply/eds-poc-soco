@@ -48,9 +48,7 @@
           "list": [],
           "insert": [],
           "sr_script": [],
-          "editor": [
-            "paste_text"
-          ],
+          "editor": [],
           "advanced": []
         }
       }
