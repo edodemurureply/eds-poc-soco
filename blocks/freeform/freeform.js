@@ -14,6 +14,28 @@ function readSource(field) {
   return source;
 }
 
+// after page load Chrome ignores document.write from external scripts (Formstack js.php uses it):
+// collect what scripts write, then insert it right after the script that wrote it
+let written = '';
+function captureWrites() {
+  document.write = (...html) => { written += html.join(''); };
+  document.writeln = (...html) => { written += `${html.join('')}\n`; };
+}
+
+function insertWritten(script) {
+  /* eslint-disable-next-line no-console */
+  console.log(`[freeform-spike] document.write captured ${written.length} chars after`, script);
+  const template = document.createElement('template');
+  template.innerHTML = written;
+  written = '';
+  const nodes = [...template.content.childNodes];
+  script.after(...nodes);
+  return nodes.flatMap((node) => {
+    if (node.nodeName === 'SCRIPT') return [node];
+    return node.querySelectorAll ? [...node.querySelectorAll('script')] : [];
+  });
+}
+
 // scripts set through innerHTML never run: recreate each, in order, waiting for external ones
 function runScript(old) {
   const script = document.createElement('script');
@@ -26,12 +48,14 @@ function runScript(old) {
     })
     : Promise.resolve();
   old.replaceWith(script);
-  return loaded;
+  return loaded.then(() => script);
 }
 
-function runScripts(container) {
-  return [...container.querySelectorAll('script')]
-    .reduce((chain, old) => chain.then(() => runScript(old)), Promise.resolve());
+function runScripts(scripts) {
+  return scripts.reduce((chain, old) => chain.then(async () => {
+    const script = await runScript(old);
+    if (written) await runScripts(insertWritten(script));
+  }), Promise.resolve());
 }
 
 export default function decorate(block) {
@@ -43,7 +67,8 @@ export default function decorate(block) {
     block.textContent = '';
     if (!source) return;
     block.innerHTML = source;
-    runScripts(block);
+    captureWrites();
+    runScripts([...block.querySelectorAll('script')]);
     return;
   }
 
