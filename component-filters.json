@@ -69,6 +69,27 @@
     ]
   },
   {
+    "id": "freeform-html",
+    "components": [
+      "richtext"
+    ],
+    "rte": {
+      "toolbar": {
+        "format": [],
+        "alignment": [],
+        "direction": [],
+        "indentation": [],
+        "blocks": [],
+        "list": [],
+        "insert": [],
+        "sr_script": [],
+        "editor": [],
+        "advanced": [],
+        "sections": []
+      }
+    }
+  },
+  {
     "id": "navigation",
     "components": [
       "nav-link"

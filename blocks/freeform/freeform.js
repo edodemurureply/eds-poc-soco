@@ -97,6 +97,12 @@ export default function decorate(block) {
   }
 
   // Universal Editor: keep the editable field, show a script-free render below it
+  // spike: point the field to the toolbar-less RTE filter instead of the default "text"
+  if (field && field.dataset.aueFilter) {
+    /* eslint-disable-next-line no-console */
+    console.log(`[freeform-spike] data-aue-filter ${field.dataset.aueFilter} -> freeform-html`);
+    field.dataset.aueFilter = 'freeform-html';
+  }
   const label = document.createElement('p');
   label.className = 'freeform-label';
   label.textContent = source ? 'Freeform · Scripts run on preview' : 'Freeform · paste HTML in the HTML field';

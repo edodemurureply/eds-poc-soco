@@ -371,7 +371,7 @@
     "id": "freeform",
     "fields": [
       {
-        "component": "textarea",
+        "component": "richtext",
         "name": "html",
         "value": "",
         "label": "HTML",

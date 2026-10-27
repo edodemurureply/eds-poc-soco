@@ -21,7 +21,7 @@
       "id": "freeform",
       "fields": [
         {
-          "component": "textarea",
+          "component": "richtext",
           "name": "html",
           "value": "",
           "label": "HTML",
@@ -31,5 +31,27 @@
       ]
     }
   ],
-  "filters": []
+  "filters": [
+    {
+      "id": "freeform-html",
+      "components": [
+        "richtext"
+      ],
+      "rte": {
+        "toolbar": {
+          "format": [],
+          "alignment": [],
+          "direction": [],
+          "indentation": [],
+          "blocks": [],
+          "list": [],
+          "insert": [],
+          "sr_script": [],
+          "editor": [],
+          "advanced": [],
+          "sections": []
+        }
+      }
+    }
+  ]
 }
