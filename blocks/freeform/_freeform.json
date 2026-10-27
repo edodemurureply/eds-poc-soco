@@ -39,7 +39,11 @@
         "richtext"
       ],
       "rte": {
-        "toolbar": {}
+        "toolbar": {
+          "editor": [
+            "paste_text"
+          ]
+        }
       }
     }
   ]
